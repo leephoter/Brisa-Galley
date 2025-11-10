@@ -1,0 +1,184 @@
+.container {
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  padding: 80px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.heroContent h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+}
+
+.heroContent p {
+  font-size: var(--font-size-base);
+  color: var(--color-gray);
+  letter-spacing: 0.05em;
+}
+
+/* Stockists Grid */
+.stockists {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.card {
+  padding: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: border-color var(--transition-base);
+}
+
+.card:hover {
+  border-color: var(--color-black);
+}
+
+.name {
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.address,
+.city {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray);
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+
+.phone,
+.email {
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
+  letter-spacing: 0.03em;
+  margin-top: 8px;
+  transition: opacity var(--transition-fast);
+}
+
+.phone:hover,
+.email:hover {
+  opacity: 0.7;
+}
+
+/* Info Section */
+.info {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 80px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.infoContent {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.infoContent h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin-bottom: 32px;
+}
+
+.infoContent p {
+  font-size: var(--font-size-base);
+  line-height: 2;
+  color: var(--color-gray);
+  letter-spacing: 0.03em;
+  margin-bottom: 16px;
+}
+
+.infoContent p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .hero {
+    padding: 60px 20px;
+  }
+
+  .heroContent h1 {
+    font-size: var(--font-size-2xl);
+    letter-spacing: 0.1em;
+  }
+
+  .heroContent p {
+    font-size: var(--font-size-sm);
+  }
+
+  .stockists {
+    padding: 60px 20px;
+  }
+
+  .card {
+    padding: 30px 20px;
+  }
+
+  .name {
+    font-size: var(--font-size-base);
+  }
+
+  .info {
+    padding: 60px 20px;
+  }
+
+  .infoContent h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .infoContent p {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (min-width: 601px) {
+  .container {
+  }
+
+  .hero {
+    padding: 100px 40px;
+  }
+
+  .stockists {
+    padding: 100px 40px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .info {
+    padding: 100px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

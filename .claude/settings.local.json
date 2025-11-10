@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.comoli.jp)",
+      "Bash(bun add:*)",
+      "Bash(mkdir:*)",
+      "Bash(bun run dev)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

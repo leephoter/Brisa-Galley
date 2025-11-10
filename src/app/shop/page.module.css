@@ -1,0 +1,150 @@
+.container {
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  padding: 80px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.heroContent h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+}
+
+.heroContent p {
+  font-size: var(--font-size-base);
+  color: var(--color-gray);
+  letter-spacing: 0.05em;
+}
+
+/* Filter Section */
+.filter {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.filterContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.categoryButton {
+  padding: 12px 24px;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.1em;
+  border: 1px solid var(--color-black);
+  background: transparent;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.categoryButton:hover {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.categoryButton.active {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.count {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray);
+  letter-spacing: 0.05em;
+}
+
+/* Products Grid */
+.products {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 20px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .hero {
+    padding: 60px 20px;
+  }
+
+  .heroContent h1 {
+    font-size: var(--font-size-2xl);
+    letter-spacing: 0.1em;
+  }
+
+  .heroContent p {
+    font-size: var(--font-size-sm);
+  }
+
+  .filter {
+    padding: 30px 20px;
+  }
+
+  .categories {
+    gap: 8px;
+  }
+
+  .categoryButton {
+    padding: 10px 20px;
+    font-size: var(--font-size-xs);
+  }
+
+  .products {
+    padding: 60px 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (min-width: 601px) {
+  .container {
+  }
+
+  .hero {
+    padding: 100px 40px;
+  }
+
+  .filter {
+    padding: 50px 40px;
+  }
+
+  .products {
+    padding: 100px 40px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
