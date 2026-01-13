@@ -18,7 +18,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <h1 className={styles.heroTitle}>Brisa Gallery</h1>
+          <h1 className={styles.heroTitle}>BRISA</h1>
           <p className={styles.heroSubtitle}>Since 2025. BRISA / SANG UN</p>
         </motion.div>
 

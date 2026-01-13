@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { stockists } from '@/lib/data';
+import { PLACE } from '@/lib/data';
 import styles from './page.module.css';
 
-export default function StockistsPage() {
+export default function PLACEPage() {
   return (
     <div className={styles.container}>
       {/* Hero Section */}
@@ -15,15 +15,15 @@ export default function StockistsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1>STOCKISTS</h1>
+          <h1>PLACE</h1>
           <p>Find our collections at these select locations worldwide</p>
         </motion.div>
       </section>
 
-      {/* Stockists Grid */}
-      <section className={styles.stockists}>
+      {/* PLACE Grid */}
+      <section className={styles.PLACE}>
         <div className={styles.grid}>
-          {stockists.map((stockist, index) => (
+          {PLACE.map((stockist, index) => (
             <motion.div
               key={stockist.id}
               className={styles.card}
@@ -65,13 +65,13 @@ export default function StockistsPage() {
         >
           <h2>Visit Us</h2>
           <p>
-            Our collections are available at carefully selected retailers around the
-            world. Each location has been chosen for their commitment to quality and
-            exceptional customer service.
+            Our collections are available at carefully selected retailers around the world. Each
+            location has been chosen for their commitment to quality and exceptional customer
+            service.
           </p>
           <p>
-            For the most current information about product availability, please contact
-            the store directly.
+            For the most current information NEWS product availability, please CALL the store
+            directly.
           </p>
         </motion.div>
       </section>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './page.module.css';
 
-export default function ContactPage() {
+export default function CALLPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,13 +39,13 @@ export default function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1>CONTACT</h1>
-          <p>We'd love to hear from you</p>
+          <h1>CALL</h1>
+          <p>{"We'd love to hear from you"}</p>
         </motion.div>
       </section>
 
       <div className={styles.content}>
-        {/* Contact Form */}
+        {/* CALL Form */}
         <motion.section
           className={styles.formSection}
           initial={{ opacity: 0, x: -40 }}
@@ -91,7 +91,7 @@ export default function ContactPage() {
                 <option value='general'>General Inquiry</option>
                 <option value='orders'>Orders & Shipping</option>
                 <option value='products'>Product Information</option>
-                <option value='stockists'>Stockist Information</option>
+                <option value='PLACE'>Stockist Information</option>
                 <option value='press'>Press & Media</option>
                 <option value='other'>Other</option>
               </select>
@@ -115,7 +115,7 @@ export default function ContactPage() {
           </form>
         </motion.section>
 
-        {/* Contact Info */}
+        {/* CALL Info */}
         <motion.section
           className={styles.infoSection}
           initial={{ opacity: 0, x: 40 }}

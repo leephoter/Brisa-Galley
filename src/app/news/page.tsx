@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import styles from './page.module.css';
 
-export default function AboutPage() {
+export default function NEWSPage() {
   return (
     <div className={styles.container}>
       {/* Hero Section */}
@@ -14,7 +14,7 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1>ABOUT</h1>
+          <h1>NEWS</h1>
           <p>Crafting timeless pieces for the modern wardrobe</p>
         </motion.div>
       </section>

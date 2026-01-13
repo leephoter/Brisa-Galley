@@ -19,8 +19,8 @@ export default function ProductDetailPage() {
       <div className={styles.container}>
         <div className={styles.notFound}>
           <h1>Product Not Found</h1>
-          <Link href="/shop" className={styles.backLink}>
-            ← Back to Shop
+          <Link href='/ARCHIVE' className={styles.backLink}>
+            ← Back to ARCHIVE
           </Link>
         </div>
       </div>
@@ -50,9 +50,7 @@ export default function ProductDetailPage() {
             {product.images.map((_, index) => (
               <button
                 key={index}
-                className={`${styles.thumbnail} ${
-                  selectedImage === index ? styles.active : ''
-                }`}
+                className={`${styles.thumbnail} ${selectedImage === index ? styles.active : ''}`}
                 onClick={() => setSelectedImage(index)}
               >
                 <div className={styles.thumbnailPlaceholder}>
@@ -120,8 +118,8 @@ export default function ProductDetailPage() {
             </details>
           </div>
 
-          <Link href="/shop" className={styles.backLink}>
-            ← Back to Shop
+          <Link href='/ARCHIVE' className={styles.backLink}>
+            ← Back to ARCHIVE
           </Link>
         </motion.div>
       </div>

@@ -31,13 +31,25 @@
   gap: 0;
 }
 
+.logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px 0;
+  font-size: var(--font-size-xl);
+  letter-spacing: var(--letter-spacing);
+  text-align: left;
+  transition: opacity var(--transition-fast);
+}
+
 .link {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 24px 0;
-  font-size: var(--font-size-lg);
+  padding: 8px 0;
+  font-size: var(--font-size-sm);
   letter-spacing: var(--letter-spacing);
   text-align: left;
   transition: opacity var(--transition-fast);
@@ -86,7 +98,7 @@
   }
 
   .link {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     padding: 12px 0;
   }
 

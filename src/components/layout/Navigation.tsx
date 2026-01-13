@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NAVIGATION_ITEMS } from '@/lib/constants';
+import InstagramLogo from '@/components/icons/InstagramLogo';
 import styles from './Navigation.module.css';
 
 interface NavigationProps {
@@ -34,7 +35,7 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
       onClose();
     }
   };
-
+  // Brisa
   return (
     <AnimatePresence>
       {isOpen && (
@@ -45,7 +46,7 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            // transition={{ duration: 0.3 }}
+            transition={{ duration: 0 }}
             onClick={onClose}
           />
 
@@ -53,21 +54,33 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
           <motion.nav
             className={styles.navigation}
             initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: 'tween', duration: 0.15 }}
+            animate={{
+              x: 0,
+              transition: { type: 'tween', duration: 0.15 },
+            }}
+            exit={{
+              x: '-100%',
+              transition: { type: 'tween', duration: 0 },
+            }}
             onClick={onClose}
           >
+            <Link
+              href={'/'}
+              className={styles.logo}
+              onClick={() => handleItemClick('BRISA', false)}
+            >
+              {'BRISA'}
+            </Link>
             <ul className={styles.list}>
               {NAVIGATION_ITEMS.map((item) => (
-                <li key={item.label} className={styles.item}>
+                <li key={item.href} className={styles.item}>
                   {item.subItems ? (
                     <>
                       <button
                         className={styles.link}
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleItemClick(item.label, true);
+                          handleItemClick(item.href, true);
                         }}
                       >
                         {item.label}
@@ -90,7 +103,7 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
                             transition={{ duration: 0.2 }}
                           >
                             {item.subItems.map((subItem) => (
-                              <li key={subItem.label} className={styles.subItem}>
+                              <li key={subItem.href} className={styles.subItem}>
                                 <Link
                                   href={subItem.href}
                                   className={styles.subLink}
@@ -108,7 +121,8 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
                     <Link
                       href={item.href}
                       className={styles.link}
-                      onClick={() => handleItemClick(item.label, false)}
+                      onClick={() => handleItemClick(item.href, false)}
+                      target={item.target}
                     >
                       {item.label}
                     </Link>

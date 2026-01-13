@@ -7,9 +7,9 @@ A modern Brisa gallery website inspired by contemporary design.
 - Minimalist black & white design
 - Responsive layout (mobile-first)
 - Collection showcase with seasonal archives
-- Shop with category filtering
+- ARCHIVE with category filtering
 - Product detail pages with image gallery
-- About, Contact, and Stockists pages
+- NEWS, CALL, and PLACE pages
 - Smooth animations with Framer Motion
 - SEO optimized
 - Custom 404 page
@@ -71,10 +71,10 @@ Brisa-gallery/
 │   ├── app/                    # App Router pages
 │   │   ├── page.tsx           # Home page
 │   │   ├── collection/        # Collection pages
-│   │   ├── shop/              # Shop pages
-│   │   ├── about/             # About page
-│   │   ├── contact/           # Contact page
-│   │   ├── stockists/         # Stockists page
+│   │   ├── ARCHIVE/              # ARCHIVE pages
+│   │   ├── NEWS/             # NEWS page
+│   │   ├── CALL/           # CALL page
+│   │   ├── PLACE/         # PLACE page
 │   │   └── not-found.tsx      # 404 page
 │   ├── components/
 │   │   ├── layout/            # Layout components (Header, Nav, Footer)

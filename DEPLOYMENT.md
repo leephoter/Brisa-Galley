@@ -363,7 +363,7 @@ For deployment issues:
 1. Check the [Next.js documentation](https://nextjs.org/docs)
 2. Review platform-specific guides
 3. Check GitHub Actions logs
-4. Contact support
+4. CALL support
 
 ---
 

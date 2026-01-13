@@ -6,7 +6,7 @@ import ProductCard from '@/components/features/ProductCard';
 import { products, categories } from '@/lib/data';
 import styles from './page.module.css';
 
-export default function ShopPage() {
+export default function ARCHIVEPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const filteredProducts =
@@ -23,7 +23,7 @@ export default function ShopPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1>SHOP</h1>
+          <h1>ARCHIVE</h1>
           <p>Explore our curated selection of contemporary Brisa</p>
         </motion.div>
       </section>

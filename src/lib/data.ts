@@ -129,16 +129,16 @@ export const getProductsByCategory = (category: string): Product[] => {
 
 export const categories = ['All', 'Outerwear', 'Shirts', 'Bottoms', 'Knitwear'] as const;
 
-// Stockists
-export const stockists: Stockist[] = [
+// PLACE
+export const PLACE: Stockist[] = [
   {
     id: '1',
     name: 'Brisa Gallery Seoul',
-    address: '123 Gangnam-daero, Gangnam-gu',
+    address: '12345 Gangnam-daero, Gangnam-gu',
     city: 'Seoul',
     country: 'South Korea',
     phone: '+82-2-1234-5678',
-    email: 'seoul@Brisagallery.com',
+    email: 'seoul@brisa.com',
   },
   {
     id: '2',
@@ -147,7 +147,7 @@ export const stockists: Stockist[] = [
     city: 'Busan',
     country: 'South Korea',
     phone: '+82-51-9876-5432',
-    email: 'busan@Brisagallery.com',
+    email: 'busan@brisa.com',
   },
   {
     id: '3',
@@ -156,7 +156,7 @@ export const stockists: Stockist[] = [
     city: 'Tokyo',
     country: 'Japan',
     phone: '+81-3-1234-5678',
-    email: 'tokyo@Brisagallery.com',
+    email: 'tokyo@brisa.com',
   },
   {
     id: '4',
@@ -165,7 +165,7 @@ export const stockists: Stockist[] = [
     city: 'New York',
     country: 'United States',
     phone: '+1-212-555-1234',
-    email: 'newyork@Brisagallery.com',
+    email: 'newyork@brisa.com',
   },
   {
     id: '5',
@@ -174,15 +174,6 @@ export const stockists: Stockist[] = [
     city: 'London',
     country: 'United Kingdom',
     phone: '+44-20-1234-5678',
-    email: 'london@Brisagallery.com',
-  },
-  {
-    id: '6',
-    name: 'Brisa Gallery Paris',
-    address: '123 Rue Saint-Honoré',
-    city: 'Paris',
-    country: 'France',
-    phone: '+33-1-2345-6789',
-    email: 'paris@Brisagallery.com',
+    email: 'london@brisa.com',
   },
 ];

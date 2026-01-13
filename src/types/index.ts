@@ -1,6 +1,7 @@
 export interface NavigationItem {
-  label: string;
+  label: React.ReactNode;
   href: string;
+  target?: '_self' | '_blank' | '_parent' | '_top';
   subItems?: NavigationItem[];
 }
 

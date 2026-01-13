@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.grid}>
-          {/* About */}
+          {/* NEWS */}
           <div className={styles.column}>
             <h3 className={styles.title}>Brisa Gallery</h3>
             <p className={styles.description}>
@@ -14,12 +14,12 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Shop */}
+          {/* ARCHIVE */}
           <div className={styles.column}>
-            <h4 className={styles.columnTitle}>Shop</h4>
+            <h4 className={styles.columnTitle}>ARCHIVE</h4>
             <ul className={styles.links}>
               <li>
-                <Link href='/shop'>All Products</Link>
+                <Link href='/ARCHIVE'>All Products</Link>
               </li>
               <li>
                 <Link href='/collection'>Collections</Link>
@@ -35,13 +35,13 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>Company</h4>
             <ul className={styles.links}>
               <li>
-                <Link href='/about'>About</Link>
+                <Link href='/NEWS'>NEWS</Link>
               </li>
               <li>
-                <Link href='/stockists'>Stockists</Link>
+                <Link href='/PLACE'>PLACE</Link>
               </li>
               <li>
-                <Link href='/contact'>Contact</Link>
+                <Link href='/CALL'>CALL</Link>
               </li>
             </ul>
           </div>

@@ -22,8 +22,8 @@
   letter-spacing: 0.05em;
 }
 
-/* Stockists Grid */
-.stockists {
+/* PLACE Grid */
+.PLACE {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 80px 20px;
@@ -130,7 +130,7 @@
     font-size: var(--font-size-sm);
   }
 
-  .stockists {
+  .PLACE {
     padding: 60px 20px;
   }
 
@@ -163,7 +163,7 @@
     padding: 100px 40px;
   }
 
-  .stockists {
+  .PLACE {
     padding: 100px 40px;
   }
 
