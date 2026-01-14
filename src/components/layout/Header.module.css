@@ -91,7 +91,8 @@
 }
 
 .subNavLink {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 8px 20px;
   font-size: var(--font-size-sm);
   letter-spacing: 0.1em;
@@ -107,6 +108,8 @@
 }
 
 .navLink {
+  display: flex;
+  align-items: center;
   font-size: var(--font-size-sm);
   letter-spacing: 0.1em;
   font-weight: 300;
@@ -124,7 +127,7 @@
   }
 
   .container {
-    padding: 0 40px;
+    padding: 0 30px;
   }
 
   .logo {

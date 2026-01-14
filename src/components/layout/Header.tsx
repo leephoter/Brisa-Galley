@@ -22,10 +22,6 @@ export default function Header() {
       transition={{ duration: 0.4 }}
     >
       <div className={styles.container}>
-        <Link href='/' className={styles.logo}>
-          BRISA
-        </Link>
-
         <nav className={styles.nav}>
           <ul className={styles.navList}>
             {NAVIGATION_ITEMS.map((item, index) => (
@@ -44,11 +40,7 @@ export default function Header() {
                     </ul>
                   </div>
                 ) : (
-                  <Link
-                    href={item.href as string}
-                    className={styles.navLink}
-                    target={item.target}
-                  >
+                  <Link href={item.href as string} className={styles.navLink} target={item.target}>
                     {item.label}
                   </Link>
                 )}
@@ -56,6 +48,9 @@ export default function Header() {
             ))}
           </ul>
         </nav>
+        <Link href='/' className={styles.logo}>
+          BRISA
+        </Link>
       </div>
     </motion.header>
   );
