@@ -1,12 +1,22 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'PLACE | Brisa Gallery',
+  title: 'Place',
   description:
-    'Find our collections at select locations worldwide. Visit us at our partner stores.',
+    'Find our collections at select locations worldwide. Visit us at our partner stores and boutiques. Discover where to shop Brisa Gallery.',
+  keywords: ['Brisa locations', 'store locations', 'fashion boutique', 'where to buy', 'stockists'],
   openGraph: {
-    title: 'PLACE | Brisa Gallery',
+    title: 'Place | Brisa Gallery',
     description: 'Find our collections at select locations worldwide.',
+    url: 'https://brisa-galley.vercel.app/place',
+    type: 'website',
+    images: ['/og-image.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Place | Brisa Gallery',
+    description: 'Find our collections at select locations worldwide.',
+    images: ['/og-image.jpg'],
   },
 };
 

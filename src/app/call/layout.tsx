@@ -1,12 +1,22 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'CALL | Brisa Gallery',
+  title: 'Contact',
   description:
-    "Get in touch with us. We're here to help with any questions NEWS our products or services.",
+    "Get in touch with us. We're here to help with any questions about our products or services. Contact Brisa Gallery for inquiries and support.",
+  keywords: ['contact Brisa', 'customer service', 'inquiries', 'support', 'get in touch'],
   openGraph: {
-    title: 'CALL | Brisa Gallery',
+    title: 'Contact | Brisa Gallery',
     description: "Get in touch with us. We're here to help.",
+    url: 'https://brisa-galley.vercel.app/call',
+    type: 'website',
+    images: ['/og-image.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact | Brisa Gallery',
+    description: "Get in touch with us. We're here to help.",
+    images: ['/og-image.jpg'],
   },
 };
 
