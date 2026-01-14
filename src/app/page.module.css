@@ -129,6 +129,8 @@
 }
 
 .navLink {
+  display: flex;
+  align-items: center;
   font-size: var(--font-size-sm);
   letter-spacing: 0.1em;
   font-weight: 300;
