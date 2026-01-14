@@ -41,18 +41,108 @@
   padding: 0 20px;
 }
 
+.heroTitleRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
 .heroTitle {
   font-size: var(--font-size-3xl);
   font-weight: 300;
   letter-spacing: 0.15em;
-  margin-bottom: 16px;
+  margin: 0;
+}
+
+.heroNav {
+  display: flex;
+}
+
+.navList {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navItemWithSub {
+  position: relative;
+}
+
+.navLabel {
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.navLabel:hover {
+  opacity: 0.6;
+}
+
+.navItemWithSub:hover .subNavList {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.subNavList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 12px;
+  padding: 12px 0;
+  background: rgb(227, 227, 227);
+  list-style: none;
+  min-width: 150px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.subNavItem {
+  padding: 0;
+}
+
+.subNavLink {
+  display: block;
+  padding: 8px 20px;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.subNavLink:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.navLink {
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  transition: opacity var(--transition-fast);
+}
+
+.navLink:hover {
+  opacity: 0.6;
 }
 
 .heroSubtitle {
   font-size: var(--font-size-base);
   letter-spacing: 0.2em;
   font-weight: 300;
-  opacity: 0.8;
 }
 
 .scrollIndicator {
@@ -134,9 +224,40 @@
 
 /* Responsive */
 @media (max-width: 600px) {
+  .heroTitleRow {
+    flex-direction: column;
+    gap: 32px;
+  }
+
   .heroTitle {
     font-size: var(--font-size-2xl);
     letter-spacing: 0.1em;
+  }
+
+  .navList {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .subNavList {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    margin-top: 8px;
+    background: transparent;
+    box-shadow: none;
+    padding: 8px 0;
+  }
+
+  .subNavLink {
+    padding: 4px 12px;
+    font-size: var(--font-size-xs);
+  }
+
+  .subNavLink:hover {
+    padding-left: 12px;
   }
 
   .heroSubtitle {

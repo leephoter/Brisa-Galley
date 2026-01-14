@@ -26,22 +26,13 @@ Email, 안심번호, 인스타 계정 링크
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   // TODO: menu depth
-  // {
-  //   label: 'COLLECTION',
-  //   href: '/collection',
-  //   subItems: [
-  //     { label: '2025 AW', href: '/collection/2025-aw' },
-  //     { label: 'Archive', href: '/collection/archive' },
-  //   ],
-  // },
   {
     label: 'ARCHIVE',
-    href: '/archive',
     // TODO: sangun double depth
-    // subItems: [
-    //   { label: '2025 AW', href: '/collection/2025-aw' },
-    //   { label: 'Archive', href: '/collection/archive' },
-    // ],
+    subItems: [
+      { label: '2025 AW', href: '/collection/2025-aw' },
+      { label: 'Archive', href: '/collection/archive' },
+    ],
   },
   {
     label: 'PLACE',

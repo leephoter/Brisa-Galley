@@ -31,9 +31,9 @@ export default function CollectionPage() {
   );
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: [{ params: { season: 'a' } }, { params: { season: 'b' } }],
-    fallback: false,
-  };
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: [{ params: { season: 'a' } }, { params: { season: 'b' } }],
+//     fallback: false,
+//   };
+// }

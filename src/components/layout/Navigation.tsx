@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NAVIGATION_ITEMS } from '@/lib/constants';
-import InstagramLogo from '@/components/icons/InstagramLogo';
 import styles from './Navigation.module.css';
 
 interface NavigationProps {
@@ -14,7 +13,6 @@ interface NavigationProps {
 
 export default function Navigation({ isOpen, onClose }: NavigationProps) {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
-
   // Prevent body scroll when navigation is open
   useEffect(() => {
     if (isOpen) {
@@ -25,6 +23,7 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
 
     return () => {
       document.body.style.overflow = 'unset';
+      setExpandedItem(null);
     };
   }, [isOpen]);
 
@@ -64,6 +63,7 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
             }}
             onClick={onClose}
           >
+            {/* BRISA Link */}
             <Link
               href={'/'}
               className={styles.logo}
@@ -71,26 +71,20 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
             >
               {'BRISA'}
             </Link>
+            {/* Page Links */}
             <ul className={styles.list}>
-              {NAVIGATION_ITEMS.map((item) => (
-                <li key={item.href} className={styles.item}>
-                  {item.subItems ? (
+              {NAVIGATION_ITEMS.map((item, index) => (
+                <li key={item.href || `nav-item-${index}`} className={styles.item}>
+                  {item.subItems && !item.href ? (
                     <>
                       <button
                         className={styles.link}
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleItemClick(item.href, true);
+                          handleItemClick(item.label as string, true);
                         }}
                       >
                         {item.label}
-                        {/* <span
-                          className={`${styles.arrow} ${
-                            expandedItem === item.label ? styles.expanded : ''
-                          }`}
-                        >
-                          ↓
-                        </span> */}
                       </button>
 
                       <AnimatePresence>
@@ -119,9 +113,9 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
                     </>
                   ) : (
                     <Link
-                      href={item.href}
+                      href={item.href as string}
                       className={styles.link}
-                      onClick={() => handleItemClick(item.href, false)}
+                      onClick={() => handleItemClick(item.href as string, false)}
                       target={item.target}
                     >
                       {item.label}

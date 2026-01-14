@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { NAVIGATION_ITEMS } from '@/lib/constants';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -8,7 +10,6 @@ export default function Home() {
     <div className={styles.container}>
       <section className={styles.hero}>
         <div className={styles.heroBackground}>
-          {/* Placeholder for hero image - users can replace with actual image */}
           <div className={styles.heroImagePlaceholder} />
         </div>
 
@@ -18,7 +19,39 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <h1 className={styles.heroTitle}>BRISA</h1>
+          <div className={styles.heroTitleRow}>
+            <h1 className={styles.heroTitle}>BRISA</h1>
+            <nav className={styles.heroNav}>
+              <ul className={styles.navList}>
+                {NAVIGATION_ITEMS.map((item, index) => (
+                  <li key={item.href || `nav-item-${index}`} className={styles.navItem}>
+                    {item.subItems && !item.href ? (
+                      <div className={styles.navItemWithSub}>
+                        <span className={styles.navLabel}>{item.label}</span>
+                        <ul className={styles.subNavList}>
+                          {item.subItems.map((subItem) => (
+                            <li key={subItem.href} className={styles.subNavItem}>
+                              <Link href={subItem.href} className={styles.subNavLink}>
+                                {subItem.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : (
+                      <Link
+                        href={item.href as string}
+                        className={styles.navLink}
+                        target={item.target}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
           <p className={styles.heroSubtitle}>Since 2025. BRISA / SANG UN</p>
         </motion.div>
 
@@ -27,31 +60,8 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.5 }}
-        >
-          {/* <span>SCROLL</span>
-          <div className={styles.scrollLine} /> */}
-        </motion.div>
+        ></motion.div>
       </section>
-      {/* 
-      <section className={styles.intro}>
-        <motion.div
-          className={styles.introContent}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2>Contemporary Brisa</h2>
-          <p>
-            Experience the intersection of timeless design and modern aesthetics. Our curated
-            collections represent the finest in contemporary Brisa, where every piece tells a
-            story of craftsmanship and innovation.
-          </p>
-          <Link href='/collection' className={styles.ctaButton}>
-            VIEW COLLECTION
-          </Link>
-        </motion.div>
-      </section> */}
     </div>
   );
 }

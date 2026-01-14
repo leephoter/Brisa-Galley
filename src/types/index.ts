@@ -1,8 +1,8 @@
 export interface NavigationItem {
   label: React.ReactNode;
-  href: string;
+  href?: string;
   target?: '_self' | '_blank' | '_parent' | '_top';
-  subItems?: NavigationItem[];
+  subItems?: (Omit<NavigationItem, 'href'> & Required<Pick<NavigationItem, 'href'>>)[];
 }
 
 export interface Collection {
