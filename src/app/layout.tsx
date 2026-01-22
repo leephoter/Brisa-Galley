@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description: 'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/images/ogImage.png',
         width: 1200,
         height: 630,
         alt: 'Brisa Gallery',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Brisa Gallery - Contemporary Fashion & Design',
     description: 'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
-    images: ['/og-image.jpg'],
+    images: ['/images/ogImage.png'],
   },
   robots: {
     index: true,

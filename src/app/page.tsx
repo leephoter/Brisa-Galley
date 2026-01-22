@@ -9,13 +9,7 @@ export default function Home() {
   return (
     <>
       <div className={styles.fullPageBackground}>
-        <Image
-          src="/images/archive/main.png"
-          alt="Background"
-          fill
-          className={styles.heroImage}
-          priority
-        />
+        <Image src='/images/main.png' alt='Background' fill className={styles.heroImage} priority />
       </div>
       <PageContainer>
         <section className={styles.hero}>
