@@ -1,14 +1,16 @@
 .header {
-  position: fixed;
+  min-width: var(--min-width);
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
   height: var(--header-height-mobile);
-  background: none;
+  /* background: transparent; */
   z-index: var(--z-header);
 }
 
 .container {
+  width: 100%;
   max-width: var(--max-width);
   height: 100%;
   margin: 0 auto;
@@ -35,7 +37,7 @@
 
 .navList {
   display: flex;
-  gap: 32px;
+  gap: 16px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -127,7 +129,11 @@
   }
 
   .container {
-    padding: 0 30px;
+    padding: 0 40px;
+  }
+
+  .navList {
+    gap: 32px;
   }
 
   .logo {

@@ -2,26 +2,30 @@
 
 import { motion } from 'framer-motion';
 import { PLACE } from '@/lib/data';
+import PageHero from '@/components/common/PageHero';
+import PageContainer from '@/components/common/PageContainer';
+import PageContent from '@/components/common/PageContent';
 import styles from './page.module.css';
 
 export default function PLACEPage() {
   return (
-    <div className={styles.container}>
-      {/* Hero Section */}
-      <section className={styles.hero}>
+    <PageContainer>
+      <PageHero title='PLACE' subtitle='Find our collections at these select locations worldwide' />
+
+      <PageContent>
         <motion.div
-          className={styles.heroContent}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          className={styles.infoContent}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h1>PLACE</h1>
-          <p>Find our collections at these select locations worldwide</p>
+          <h2>COMMING SOON...</h2>
         </motion.div>
-      </section>
+      </PageContent>
 
       {/* PLACE Grid */}
-      <section className={styles.PLACE}>
+      {/* <PageContent>
         <div className={styles.grid}>
           {PLACE.map((stockist, index) => (
             <motion.div
@@ -52,10 +56,10 @@ export default function PLACEPage() {
             </motion.div>
           ))}
         </div>
-      </section>
+      </PageContent> */}
 
       {/* Info Section */}
-      <section className={styles.info}>
+      {/* <PageContent>
         <motion.div
           className={styles.infoContent}
           initial={{ opacity: 0, y: 40 }}
@@ -74,7 +78,7 @@ export default function PLACEPage() {
             directly.
           </p>
         </motion.div>
-      </section>
-    </div>
+      </PageContent> */}
+    </PageContainer>
   );
 }

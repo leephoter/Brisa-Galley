@@ -1,128 +1,80 @@
 'use client';
 
-import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { getProductBySlug } from '@/lib/data';
+import Image from 'next/image';
+import { useInView } from 'react-intersection-observer';
+import { getArchiveBySlug } from '@/lib/data';
+import PageHero from '@/components/common/PageHero';
+import PageContainer from '@/components/common/PageContainer';
+import PageContent from '@/components/common/PageContent';
 import styles from './page.module.css';
 
-export default function ProductDetailPage() {
+export default function ArchiveDetailPage() {
   const params = useParams();
   const id = params.id as string;
-  const product = getProductBySlug(id);
+  const archive = getArchiveBySlug(id);
 
-  const [selectedImage, setSelectedImage] = useState(0);
-
-  if (!product) {
+  if (!archive) {
     return (
-      <div className={styles.container}>
+      <PageContainer>
         <div className={styles.notFound}>
-          <h1>Product Not Found</h1>
-          <Link href='/ARCHIVE' className={styles.backLink}>
+          <h1>Archive Not Found</h1>
+          <Link href='/archive' className={styles.backLink}>
             ← Back to ARCHIVE
           </Link>
         </div>
-      </div>
+      </PageContainer>
     );
   }
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('ko-KR', {
-      style: 'currency',
-      currency: 'KRW',
-    }).format(price);
-  };
+  return (
+    <PageContainer>
+      <PageHero title={archive.title} subtitle={archive.season} />
+
+      {/* Image Gallery - 2 Column Scroll */}
+      <PageContent>
+        <div className={styles.imageGrid}>
+          {archive.images.map((image, index) => (
+            <ImageCard key={index} image={image} index={index} title={archive.title} />
+          ))}
+        </div>
+      </PageContent>
+
+      {/* Back Link */}
+      {/* <PageContent>
+        <Link href='/archive' className={styles.backLink}>
+          ← Back to ARCHIVE
+        </Link>
+      </PageContent> */}
+    </PageContainer>
+  );
+}
+
+function ImageCard({ image, index, title }: { image: string; index: number; title: string }) {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        {/* Image Gallery */}
-        <div className={styles.gallery}>
-          <div className={styles.mainImage}>
-            <div className={styles.imagePlaceholder}>
-              <span>{product.name}</span>
-              <p className={styles.imageNumber}>Image {selectedImage + 1}</p>
-            </div>
-          </div>
-
-          <div className={styles.thumbnails}>
-            {product.images.map((_, index) => (
-              <button
-                key={index}
-                className={`${styles.thumbnail} ${selectedImage === index ? styles.active : ''}`}
-                onClick={() => setSelectedImage(index)}
-              >
-                <div className={styles.thumbnailPlaceholder}>
-                  <span>{index + 1}</span>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Product Info */}
-        <motion.div
-          className={styles.info}
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className={styles.infoHeader}>
-            <p className={styles.category}>{product.category}</p>
-            <h1 className={styles.title}>{product.name}</h1>
-            <p className={styles.price}>{formatPrice(product.price)}</p>
-          </div>
-
-          <div className={styles.description}>
-            <p>{product.description}</p>
-          </div>
-
-          <div className={styles.actions}>
-            {product.inStock ? (
-              <button className={styles.addToCart}>ADD TO CART</button>
-            ) : (
-              <button className={styles.outOfStock} disabled>
-                OUT OF STOCK
-              </button>
-            )}
-          </div>
-
-          <div className={styles.details}>
-            <details className={styles.detailsItem}>
-              <summary>Product Details</summary>
-              <div className={styles.detailsContent}>
-                <ul>
-                  <li>High-quality materials</li>
-                  <li>Expert craftsmanship</li>
-                  <li>Timeless design</li>
-                  <li>Made with care</li>
-                </ul>
-              </div>
-            </details>
-
-            <details className={styles.detailsItem}>
-              <summary>Size & Fit</summary>
-              <div className={styles.detailsContent}>
-                <p>Model is 180cm and wears size M</p>
-                <p>Regular fit</p>
-              </div>
-            </details>
-
-            <details className={styles.detailsItem}>
-              <summary>Shipping & Returns</summary>
-              <div className={styles.detailsContent}>
-                <p>Free shipping on orders over ₩50,000</p>
-                <p>30-day return policy</p>
-              </div>
-            </details>
-          </div>
-
-          <Link href='/ARCHIVE' className={styles.backLink}>
-            ← Back to ARCHIVE
-          </Link>
-        </motion.div>
+    <motion.div
+      ref={ref}
+      className={styles.imageCard}
+      initial={{ opacity: 0, y: 60 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+      transition={{ duration: 0.6, delay: (index % 2) * 0.1 }}
+    >
+      <div className={styles.imageWrapper}>
+        <Image
+          src={image}
+          alt={`${title} - Image ${index + 1}`}
+          fill
+          className={styles.image}
+          priority={index < 4}
+        />
       </div>
-    </div>
+    </motion.div>
   );
 }

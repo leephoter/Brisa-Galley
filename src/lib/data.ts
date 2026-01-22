@@ -1,23 +1,86 @@
-import { Collection, Product, Stockist } from '@/types';
+import { Collection, Product, Stockist, Archive } from '@/types';
+
+// Archives (시즌별 이미지 갤러리)
+export const archives: Archive[] = [
+  {
+    id: '1',
+    season: 'SPRING / SUMMER',
+    year: 2026,
+    title: '2026 SS',
+    description: 'Spring Summer 2026 Collection',
+    slug: '2026-ss',
+    images: [
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+    ],
+  },
+  {
+    id: '2',
+    season: 'FALL / WINTER',
+    year: 2026,
+    title: '2026 FW',
+    description: 'Fall Winter 2026 Collection',
+    slug: '2026-fw',
+    images: [
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+      '/images/archive/2026-ss-02.jpg',
+      '/images/archive/2026-ss-01.jpg',
+    ],
+  },
+];
+
+export const getArchiveBySlug = (slug: string): Archive | undefined => {
+  return archives.find((archive) => {
+    console.log('archive::', archive);
+    console.log('slug::', slug);
+    return archive.slug === slug;
+  });
+};
 
 export const collections: Collection[] = [
   {
     id: '1',
-    season: 'AUTUMN / WINTER',
-    year: 2025,
-    title: '2025 AW',
+    season: 'SPRING / SUMMER',
+    year: 2026,
+    title: '2026 SS',
     description: 'The latest collection celebrating contemporary minimalism and timeless design.',
-    imageUrl: '/images/collections/2025-aw.jpg',
-    slug: '2025-aw',
+    imageUrl: '/images/collections/2026-ss.jpg',
+    slug: '2026-ss',
   },
   {
     id: '2',
-    season: 'SPRING / SUMMER',
-    year: 2025,
-    title: '2025 SS',
-    description: 'Light and airy designs for the warmer seasons.',
-    imageUrl: '/images/collections/2025-ss.jpg',
-    slug: '2025-ss',
+    season: 'FALL / WINTER',
+    year: 2026,
+    title: '2026 FW',
+    description: 'Warm and cozy designs for the colder seasons.',
+    imageUrl: '/images/collections/2026-fw.jpg',
+    slug: '2026-fw',
   },
 ];
 

@@ -20,7 +20,8 @@
   /* Layout */
   --header-height-mobile: 56px;
   --header-height-desktop: 68px;
-  --max-width: 1440px;
+  --max-width: 900px;
+  --min-width: 375px;
 
   /* Breakpoints */
   --breakpoint-mobile: 600px;

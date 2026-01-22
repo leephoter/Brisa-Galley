@@ -1,19 +1,11 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 import styles from './Header.module.css';
 
 export default function Header() {
-  const pathname = usePathname();
-
-  // Hide header on home page
-  if (pathname === '/') {
-    return null;
-  }
-
   return (
     <motion.header
       className={styles.header}
