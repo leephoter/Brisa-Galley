@@ -1,43 +1,13 @@
-.container {
-  min-height: 100vh;
-}
-
-/* Hero Section */
-.hero {
-  padding: 80px 20px;
-  text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.heroContent h1 {
-  font-size: var(--font-size-3xl);
-  font-weight: 300;
-  letter-spacing: 0.15em;
-  margin-bottom: 16px;
-}
-
-.heroContent p {
-  font-size: var(--font-size-base);
-  color: var(--color-gray);
-  letter-spacing: 0.05em;
-}
-
 /* Story Section */
-.story {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 100px 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 .storyContent {
-  max-width: 700px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .storyContent h2 {
   font-size: var(--font-size-2xl);
-  font-weight: 300;
+  font-weight: 200;
   letter-spacing: 0.1em;
   margin-bottom: 40px;
   text-align: center;
@@ -46,65 +16,17 @@
 .text {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 8px;
 }
 
 .text p {
   font-size: var(--font-size-base);
-  line-height: 2;
-  color: var(--color-gray);
-  letter-spacing: 0.03em;
-}
-
-/* Philosophy Section */
-.philosophy {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 100px 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.philosophyContent h2 {
-  font-size: var(--font-size-2xl);
-  font-weight: 300;
-  letter-spacing: 0.1em;
-  margin-bottom: 60px;
-  text-align: center;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-}
-
-.card {
-  padding: 40px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.card h3 {
-  font-size: var(--font-size-lg);
-  font-weight: 300;
-  letter-spacing: 0.05em;
-  margin-bottom: 16px;
-}
-
-.card p {
-  font-size: var(--font-size-sm);
-  line-height: 1.8;
+  line-height: 1.5;
   color: var(--color-gray);
   letter-spacing: 0.03em;
 }
 
 /* Vision Section */
-.vision {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 100px 20px;
-}
-
 .visionContent {
   max-width: 700px;
   margin: 0 auto;
@@ -127,23 +49,6 @@
 
 /* Responsive */
 @media (max-width: 600px) {
-  .hero {
-    padding: 60px 20px;
-  }
-
-  .heroContent h1 {
-    font-size: var(--font-size-2xl);
-    letter-spacing: 0.1em;
-  }
-
-  .heroContent p {
-    font-size: var(--font-size-sm);
-  }
-
-  .story {
-    padding: 80px 20px;
-  }
-
   .storyContent h2 {
     font-size: var(--font-size-xl);
   }
@@ -152,53 +57,11 @@
     font-size: var(--font-size-sm);
   }
 
-  .philosophy {
-    padding: 80px 20px;
-  }
-
-  .philosophyContent h2 {
-    font-size: var(--font-size-xl);
-  }
-
-  .card {
-    padding: 30px 20px;
-  }
-
-  .vision {
-    padding: 80px 20px;
-  }
-
   .visionContent h2 {
     font-size: var(--font-size-xl);
   }
 
   .visionContent p {
     font-size: var(--font-size-sm);
-  }
-}
-
-@media (min-width: 601px) {
-  .container {
-  }
-
-  .hero {
-    padding: 100px 40px;
-  }
-
-  .story {
-    padding: 120px 40px;
-  }
-
-  .philosophy {
-    padding: 120px 40px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
-
-  .vision {
-    padding: 120px 40px;
   }
 }

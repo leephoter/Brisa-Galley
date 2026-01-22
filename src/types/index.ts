@@ -35,3 +35,13 @@ export interface Stockist {
   phone?: string;
   email?: string;
 }
+
+export interface Archive {
+  id: string;
+  season: string;
+  year: number;
+  title: string;
+  description?: string;
+  slug: string;
+  images: string[];
+}

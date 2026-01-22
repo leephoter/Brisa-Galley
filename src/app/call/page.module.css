@@ -1,114 +1,12 @@
-.container {
-  min-height: 100vh;
-}
-
-/* Hero Section */
-.hero {
-  padding: 80px 20px;
-  text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.heroContent h1 {
-  font-size: var(--font-size-3xl);
-  font-weight: 300;
-  letter-spacing: 0.15em;
-  margin-bottom: 16px;
-}
-
-.heroContent p {
-  font-size: var(--font-size-base);
-  color: var(--color-gray);
-  letter-spacing: 0.05em;
-}
-
-/* Content */
-.content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 80px 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 60px;
-}
-
-/* Form Section */
-.formSection h2 {
-  font-size: var(--font-size-xl);
-  font-weight: 300;
-  letter-spacing: 0.05em;
-  margin-bottom: 32px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.formGroup label {
-  font-size: var(--font-size-sm);
-  letter-spacing: 0.05em;
-  color: var(--color-gray);
-}
-
-.formGroup input,
-.formGroup select,
-.formGroup textarea {
-  padding: 14px 16px;
-  font-size: var(--font-size-base);
-  font-family: inherit;
-  letter-spacing: 0.03em;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background: var(--color-white);
-  transition: border-color var(--transition-base);
-}
-
-.formGroup input:focus,
-.formGroup select:focus,
-.formGroup textarea:focus {
-  outline: none;
-  border-color: var(--color-black);
-}
-
-.formGroup textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.submitButton {
-  padding: 16px 32px;
-  font-size: var(--font-size-base);
-  letter-spacing: 0.1em;
-  border: 1px solid var(--color-black);
-  background: var(--color-black);
-  color: var(--color-white);
-  cursor: pointer;
-  transition: all var(--transition-base);
-  margin-top: 8px;
-}
-
-.submitButton:hover {
-  background: transparent;
-  color: var(--color-black);
-}
-
 /* Info Section */
 .infoSection {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  width: 100%;
 }
 
 .infoBlock {
   padding-bottom: 32px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .infoBlock:last-child {
@@ -117,21 +15,14 @@
 }
 
 .infoBlock h3 {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-xl);
   font-weight: 400;
   letter-spacing: 0.05em;
   margin-bottom: 16px;
 }
 
-.infoBlock p {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray);
-  letter-spacing: 0.03em;
-  line-height: 1.8;
-  margin-bottom: 4px;
-}
-
 .infoBlock a {
+  width: fit-content;
   display: block;
   font-size: var(--font-size-sm);
   color: var(--color-black);
@@ -144,69 +35,48 @@
   opacity: 0.7;
 }
 
-.social {
+/* Philosophy Section */
+.philosophyContent {
+  width: 100%;
+}
+
+.grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 40px;
 }
 
-.socialLink {
-  font-size: var(--font-size-sm);
+.card {
+  width: 400px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 36px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: border-color 0.6s ease;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.card:hover {
+  border-color: var(--color-black);
+}
+
+.card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 300;
   letter-spacing: 0.05em;
-  transition: opacity var(--transition-fast);
+  margin-bottom: 16px;
 }
 
-.socialLink:hover {
-  opacity: 0.7;
+.card a {
+  width: fit-content;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
-  .hero {
-    padding: 60px 20px;
-  }
-
-  .heroContent h1 {
-    font-size: var(--font-size-2xl);
-    letter-spacing: 0.1em;
-  }
-
-  .heroContent p {
-    font-size: var(--font-size-sm);
-  }
-
-  .content {
-    padding: 60px 20px;
-  }
-
-  .formSection h2 {
-    font-size: var(--font-size-lg);
-  }
-
-  .formGroup input,
-  .formGroup select,
-  .formGroup textarea {
-    padding: 12px 14px;
-    font-size: var(--font-size-sm);
-  }
-
-  .submitButton {
-    padding: 14px 28px;
-    font-size: var(--font-size-sm);
-  }
-}
-
-@media (min-width: 601px) {
-  .container {
-  }
-
-  .hero {
-    padding: 100px 40px;
-  }
-
-  .content {
-    padding: 100px 40px;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 80px;
+  .card {
+    width: 100%;
+    padding: 24px 20px;
   }
 }

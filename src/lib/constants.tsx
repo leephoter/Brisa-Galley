@@ -30,8 +30,8 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     label: 'ARCHIVE',
     // TODO: sangun double depth
     subItems: [
-      { label: '2025 AW', href: '/collection/2025-aw' },
-      { label: 'Archive', href: '/collection/archive' },
+      { label: '2026 SS', href: '/archive/2026-ss' },
+      { label: '2026 FW', href: '/archive/2026-fw' },
     ],
   },
   {
