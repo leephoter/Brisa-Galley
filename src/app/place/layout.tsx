@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     description: 'Find our collections at select locations worldwide.',
     url: 'https://brisa-galley.vercel.app/place',
     type: 'website',
-    images: ['/og-image.jpg'],
+    images: ['/images/ogImage.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Place | Brisa Gallery',
     description: 'Find our collections at select locations worldwide.',
-    images: ['/og-image.jpg'],
+    images: ['/images/ogImage.png'],
   },
 };
 

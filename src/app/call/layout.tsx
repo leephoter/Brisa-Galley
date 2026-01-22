@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     description: "Get in touch with us. We're here to help.",
     url: 'https://brisa-galley.vercel.app/call',
     type: 'website',
-    images: ['/og-image.jpg'],
+    images: ['/images/ogImage.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Contact | Brisa Gallery',
     description: "Get in touch with us. We're here to help.",
-    images: ['/og-image.jpg'],
+    images: ['/images/ogImage.png'],
   },
 };
 

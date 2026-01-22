@@ -41,13 +41,6 @@ export default function ArchiveDetailPage() {
           ))}
         </div>
       </PageContent>
-
-      {/* Back Link */}
-      {/* <PageContent>
-        <Link href='/archive' className={styles.backLink}>
-          ← Back to ARCHIVE
-        </Link>
-      </PageContent> */}
     </PageContainer>
   );
 }

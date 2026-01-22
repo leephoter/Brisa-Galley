@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     description: 'Discover our curated selection of contemporary fashion archive.',
     url: 'https://brisa-galley.vercel.app/archive',
     type: 'website',
-    images: ['/og-image.jpg'],
+    images: ['/images/ogImage.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Archive | Brisa Gallery',
     description: 'Discover our curated selection of contemporary fashion archive.',
-    images: ['/og-image.jpg'],
+    images: ['/images/ogImage.png'],
   },
 };
 

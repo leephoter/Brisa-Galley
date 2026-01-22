@@ -19,7 +19,7 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>ARCHIVE</h4>
             <ul className={styles.links}>
               <li>
-                <Link href='/ARCHIVE'>All Products</Link>
+                <Link href='/archive'>All Products</Link>
               </li>
               <li>
                 <Link href='/collection'>Collections</Link>
@@ -35,13 +35,13 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>Company</h4>
             <ul className={styles.links}>
               <li>
-                <Link href='/NEWS'>NEWS</Link>
+                <Link href='/news'>NEWS</Link>
               </li>
               <li>
-                <Link href='/PLACE'>PLACE</Link>
+                <Link href='/place'>PLACE</Link>
               </li>
               <li>
-                <Link href='/CALL'>CALL</Link>
+                <Link href='/call'>CALL</Link>
               </li>
             </ul>
           </div>

@@ -56,11 +56,7 @@ export const archives: Archive[] = [
 ];
 
 export const getArchiveBySlug = (slug: string): Archive | undefined => {
-  return archives.find((archive) => {
-    console.log('archive::', archive);
-    console.log('slug::', slug);
-    return archive.slug === slug;
-  });
+  return archives.find((archive) => archive.slug === slug);
 };
 
 export const collections: Collection[] = [

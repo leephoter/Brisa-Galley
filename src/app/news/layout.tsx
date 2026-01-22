@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     description: 'Learn about our story, philosophy, and commitment to timeless design.',
     url: 'https://brisa-galley.vercel.app/news',
     type: 'website',
-    images: ['/og-image.jpg'],
+    images: ['/images/ogImage.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'News | Brisa Gallery',
     description: 'Learn about our story, philosophy, and commitment to timeless design.',
-    images: ['/og-image.jpg'],
+    images: ['/images/ogImage.png'],
   },
 };
 

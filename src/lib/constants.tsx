@@ -61,5 +61,5 @@ export const BREAKPOINTS = {
 
 export const HEADER_HEIGHT = {
   mobile: 56,
-  desktop: 69,
+  desktop: 68,
 } as const;

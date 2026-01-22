@@ -59,26 +59,6 @@
   opacity: 0.6;
 }
 
-.scrollLine {
-  width: 1px;
-  height: 40px;
-  animation: scrollAnimation 2s ease-in-out infinite;
-}
-
-@keyframes scrollAnimation {
-  0% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-}
-
 .ctaButton {
   display: inline-block;
   padding: 16px 48px;
@@ -104,28 +84,7 @@
     font-size: var(--font-size-sm);
   }
 
-  .intro {
-    padding: 80px 20px;
-  }
-
-  .introContent h2 {
-    font-size: var(--font-size-xl);
-  }
-
-  .introContent p {
-    font-size: var(--font-size-sm);
-  }
-
   .ctaButton {
     padding: 14px 36px;
-  }
-}
-
-@media (min-width: 601px) {
-  .container {
-  }
-
-  .intro {
-    padding: 160px 40px;
   }
 }
