@@ -5,7 +5,6 @@
   left: 0;
   right: 0;
   height: var(--header-height-mobile);
-  /* background: transparent; */
   z-index: var(--z-header);
 }
 
