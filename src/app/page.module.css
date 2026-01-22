@@ -1,36 +1,27 @@
-.container {
-  min-height: 100vh;
+/* Full Page Background */
+.fullPageBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.heroImage {
+  object-fit: cover;
 }
 
 /* Hero Section */
 .hero {
   position: relative;
-  height: 100vh;
   width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-}
-
-.heroBackground {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.heroImagePlaceholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
-  /* Users can replace this with:
-     background-image: url('/images/hero.jpg');
-     background-size: cover;
-     background-position: center;
-  */
+  padding-bottom: 100px;
 }
 
 .heroContent {
@@ -71,7 +62,6 @@
 .scrollLine {
   width: 1px;
   height: 40px;
-  background: var(--color-black);
   animation: scrollAnimation 2s ease-in-out infinite;
 }
 
@@ -99,7 +89,6 @@
 }
 
 .ctaButton:hover {
-  background: var(--color-black);
   color: var(--color-white);
   opacity: 1;
 }
