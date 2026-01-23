@@ -1,5 +1,5 @@
 {
-  "buildCommand": "bun run build:skip-version",
+  "buildCommand": "bun run build:skip-version -- --webpack",
   "devCommand": "bun run dev",
   "installCommand": "bun install",
   "framework": "nextjs",

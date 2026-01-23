@@ -13,6 +13,18 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.module.rules.push({
+        test: /\.(tsx|jsx)$/,
+        use: {
+          loader: '@locator/webpack-loader',
+          options: { env: 'development' },
+        },
+      });
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
