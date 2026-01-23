@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "node scripts/version-check.js",
-    "build:skip-version": "next build && node -p \"'\\n ✅✅✅ current version: ' + require('./package.json').version + ' ✅✅✅' \"",
+    "build:skip-version": "next build --webpack && node -p \"'\\n ✅✅✅ current version: ' + require('./package.json').version + ' ✅✅✅' \"",
     "start": "next start",
     "lint": "eslint"
   },
