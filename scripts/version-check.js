@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports */
 
 const fs = require('fs');
 const path = require('path');
@@ -27,7 +28,7 @@ async function main() {
 
       console.log('\n✅ 빌드 성공!\n');
       return true;
-    } catch (error) {
+    } catch {
       console.error('\n❌ 빌드 실패!\n');
       process.exit(1);
     }
