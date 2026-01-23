@@ -4,7 +4,10 @@
       "WebFetch(domain:www.comoli.jp)",
       "Bash(bun add:*)",
       "Bash(mkdir:*)",
-      "Bash(bun run dev)"
+      "Bash(bun run dev)",
+      "Bash(bun run build)",
+      "Bash(bun run build:skip-version:*)",
+      "Bash(bun dev)"
     ],
     "deny": [],
     "ask": []

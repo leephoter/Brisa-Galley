@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import './globals.css';
+import packageJson from '../../package.json';
+
+const APP_VERSION = packageJson.version;
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://brisa-galley.vercel.app'),
@@ -89,7 +92,7 @@ export default function RootLayout({
 
   return (
     <html lang='ko' suppressHydrationWarning>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning data-version={APP_VERSION}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
