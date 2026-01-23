@@ -63,12 +63,6 @@
   opacity: 0.6;
 }
 
-.navItemWithSub:hover .subNavList {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
 .subNavList {
   position: absolute;
   top: 100%;
@@ -85,6 +79,12 @@
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 10;
+}
+
+.subNavListOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .subNavItem {
