@@ -1,6 +1,6 @@
 {
   "buildCommand": "bun run build:skip-version",
-  "devCommand": "bun run build:skip-version",
+  "devCommand": "bun run dev",
   "installCommand": "bun install",
   "framework": "nextjs",
   "outputDirectory": ".next",
