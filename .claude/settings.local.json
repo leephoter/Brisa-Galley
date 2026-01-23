@@ -5,7 +5,8 @@
       "Bash(bun add:*)",
       "Bash(mkdir:*)",
       "Bash(bun run dev)",
-      "Bash(bun run build)"
+      "Bash(bun run build)",
+      "Bash(bun run build:skip-version:*)"
     ],
     "deny": [],
     "ask": []

@@ -56,7 +56,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 bun run dev          # Start development server
 
 # Production
-bun run build        # Build for production
+bun run build:skip-version        # Build for production
 bun run start        # Start production server
 
 # Linting
