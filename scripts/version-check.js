@@ -21,7 +21,7 @@ async function main() {
     console.log('\n🚀 빌드를 시작합니다...\n');
 
     try {
-      execSync('next build --webpack', {
+      execSync('next build', {
         stdio: 'inherit',
         cwd: path.join(__dirname, '..'),
       });

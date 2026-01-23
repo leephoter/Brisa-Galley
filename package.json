@@ -3,9 +3,9 @@
   "version": "1.0.2",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
+    "dev": "next dev",
     "build": "node scripts/version-check.js",
-    "build:skip-version": "next build --webpack",
+    "build:skip-version": "next build",
     "start": "next start",
     "lint": "eslint"
   },

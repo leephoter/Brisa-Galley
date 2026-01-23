@@ -4,7 +4,8 @@
       "WebFetch(domain:www.comoli.jp)",
       "Bash(bun add:*)",
       "Bash(mkdir:*)",
-      "Bash(bun run dev)"
+      "Bash(bun run dev)",
+      "Bash(bun run build)"
     ],
     "deny": [],
     "ask": []
