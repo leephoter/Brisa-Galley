@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation'
 import ArchiveForm from '@/components/admin/ArchiveForm'
 import styles from './edit.module.css'
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function EditArchivePage({
   params
 }: {

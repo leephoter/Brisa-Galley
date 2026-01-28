@@ -2,6 +2,9 @@ import { createServerSupabaseClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import styles from './pages.module.css'
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function AdminPagesPage() {
   const supabase = await createServerSupabaseClient()
 

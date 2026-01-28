@@ -2,6 +2,9 @@ import { createServerSupabaseClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 import styles from './dashboard.module.css';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function AdminDashboard() {
   const supabase = await createServerSupabaseClient();
 

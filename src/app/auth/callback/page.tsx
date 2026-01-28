@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import styles from './callback.module.css';
 
+export const dynamic = 'force-dynamic';
+
 export default function AuthCallbackPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);

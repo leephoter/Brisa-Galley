@@ -7,6 +7,7 @@
 .actions {
   display: flex;
   justify-content: flex-end;
+  gap: 1rem;
 }
 
 .inviteBtn {
@@ -23,6 +24,27 @@
 
 .inviteBtn:hover {
   background-color: #333;
+}
+
+.cleanupBtn {
+  padding: 0.75rem 1.5rem;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cleanupBtn:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+.cleanupBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .inviteForm {

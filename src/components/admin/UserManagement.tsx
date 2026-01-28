@@ -17,6 +17,7 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
   const [showInviteForm, setShowInviteForm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [cleaning, setCleaning] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     role: 'manager' as 'master' | 'manager',
@@ -88,6 +89,34 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
     }
   }
 
+  async function handleCleanup() {
+    if (!confirm('1분 이상 지난 미확인 사용자를 정리하시겠습니까?')) {
+      return;
+    }
+
+    setCleaning(true);
+
+    try {
+      const response = await fetch('/api/admin/users/cleanup', {
+        method: 'DELETE',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to cleanup users');
+      }
+
+      alert(`${data.deletedUsers?.length || 0}명의 만료된 사용자가 삭제되었습니다.`);
+      router.refresh();
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : '정리 실패';
+      alert(`정리 실패: ${errorMessage}`);
+    } finally {
+      setCleaning(false);
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.actions}>
@@ -96,6 +125,14 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
           className={styles.inviteBtn}
         >
           {showInviteForm ? 'Cancel' : '+ Invite New User'}
+        </button>
+        <button
+          onClick={handleCleanup}
+          disabled={cleaning}
+          className={styles.cleanupBtn}
+          title="1분 이상 지난 미확인 사용자 정리"
+        >
+          {cleaning ? 'Cleaning...' : '🗑️ Cleanup Expired'}
         </button>
       </div>
 

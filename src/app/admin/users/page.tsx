@@ -1,12 +1,18 @@
-import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { createServerSupabaseClient, createServerSupabaseAdminClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import UserManagement from '@/components/admin/UserManagement';
 import styles from './users.module.css';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function AdminUsersPage() {
   const supabase = await createServerSupabaseClient();
+  const adminClient = createServerSupabaseAdminClient();
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     redirect('/login');
@@ -24,8 +30,8 @@ export default async function AdminUsersPage() {
     redirect('/admin');
   }
 
-  // 모든 사용자 조회
-  const { data: users } = await supabase
+  // 모든 사용자 조회 (admin client 사용하여 RLS 우회)
+  const { data: users } = await adminClient
     .from('admin_users')
     .select('*')
     .order('created_at', { ascending: false });

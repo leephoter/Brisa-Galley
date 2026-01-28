@@ -31,8 +31,12 @@ export async function GET() {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (error) throw error;
+    if (error) {
+      console.error('Failed to fetch admin_users:', error);
+      throw error;
+    }
 
+    console.log('Fetched admin_users from API:', data);
     return NextResponse.json({ data });
   } catch (error: unknown) {
     console.error('Failed to fetch users:', error);
@@ -81,6 +85,39 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 이미 같은 이메일로 초대된 사용자가 있는지 확인
+    const { data: existingUsers } = await adminClient.auth.admin.listUsers();
+    const existingUser = existingUsers?.users.find((u) => u.email === email);
+
+    if (existingUser) {
+      const createdAt = new Date(existingUser.created_at);
+      const now = new Date();
+      const timeDiffMinutes = (now.getTime() - createdAt.getTime()) / (1000 * 60);
+
+      // 1분 이상 지났고 아직 비밀번호 설정 안 됨 (confirmed_at이 null)
+      if (timeDiffMinutes >= 1 && !existingUser.confirmed_at) {
+        console.log(`Deleting expired unconfirmed user: ${email}`);
+
+        // admin_users 테이블에서 삭제
+        await adminClient.from('admin_users').delete().eq('id', existingUser.id);
+
+        // auth.users에서 삭제
+        await adminClient.auth.admin.deleteUser(existingUser.id);
+      } else if (!existingUser.confirmed_at) {
+        // 1분 미만이고 아직 미확인
+        return NextResponse.json(
+          { error: `이메일이 이미 초대되었습니다. ${Math.ceil(60 - timeDiffMinutes)}초 후에 다시 시도하세요.` },
+          { status: 409 },
+        );
+      } else {
+        // 이미 확인된 사용자
+        return NextResponse.json(
+          { error: '이미 등록된 이메일입니다.' },
+          { status: 409 },
+        );
+      }
+    }
+
     // inviteUserByEmail()만 자동으로 이메일을 보내고 사용자가 비밀번호를 설정할 수 있게 함
     const { data: newAuthUser, error: authError } = await adminClient.auth.admin.inviteUserByEmail(
       email,
@@ -107,11 +144,13 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (adminError) {
+      console.error('Failed to insert into admin_users:', adminError);
       // admin_users 추가 실패 시 auth user도 삭제
       await adminClient.auth.admin.deleteUser(newAuthUser.user.id);
       throw adminError;
     }
 
+    console.log('Successfully created admin user:', newAdminUser);
     return NextResponse.json({ data: newAdminUser }, { status: 201 });
   } catch (error: unknown) {
     console.error('Failed to create user:', error);

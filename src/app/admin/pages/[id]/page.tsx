@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation'
 import PageForm from '@/components/admin/PageForm'
 import styles from './edit.module.css'
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function EditPagePage({
   params
 }: {

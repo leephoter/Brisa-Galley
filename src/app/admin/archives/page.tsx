@@ -3,6 +3,9 @@ import Link from 'next/link';
 import ArchiveList from '@/components/admin/ArchiveList';
 import styles from './archives.module.css';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function AdminArchivesPage() {
   const supabase = await createServerSupabaseClient();
 
