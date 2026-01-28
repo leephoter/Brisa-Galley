@@ -66,14 +66,11 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { email, password, role } = body;
+    const { email, role } = body;
 
     // 유효성 검사
-    if (!email || !password || !role) {
-      return NextResponse.json(
-        { error: 'Email, password, and role are required' },
-        { status: 400 },
-      );
+    if (!email || !role) {
+      return NextResponse.json({ error: 'Email and role are required' }, { status: 400 });
     }
 
     if (role !== 'master' && role !== 'manager') {
@@ -83,17 +80,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Admin client를 사용하여 사용자 생성 (service_role key 필요)
-    // 개발 환경에서는 이메일 확인 건너뛰기, 프로덕션에서는 필수
-    const { data: newAuthUser, error: authError } = await adminClient.auth.admin.createUser({
+    // inviteUserByEmail()만 자동으로 이메일을 보내고 사용자가 비밀번호를 설정할 수 있게 함
+    const { data: newAuthUser, error: authError } = await adminClient.auth.admin.inviteUserByEmail(
       email,
-      password,
-      email_confirm: false,
-      // email_confirm: process.env.NODE_ENV === 'development', // dev: skip, prod: required
-    });
+      {
+        data: {
+          role, // metadata에 role 저장
+        },
+        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/auth/callback`,
+      },
+    );
 
     if (authError) throw authError;
-    if (!newAuthUser.user) throw new Error('Failed to create user');
+    if (!newAuthUser.user) throw new Error('Failed to invite user');
 
     // admin_users 테이블에 추가 (일반 supabase client 사용)
     const { data: newAdminUser, error: adminError } = await adminClient

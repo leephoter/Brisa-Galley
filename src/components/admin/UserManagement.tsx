@@ -19,15 +19,16 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
   const [deleting, setDeleting] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
     role: 'manager' as 'master' | 'manager',
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   async function handleInvite(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess('');
 
     try {
       const response = await fetch('/api/admin/users', {
@@ -42,10 +43,15 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
         throw new Error(data.error || 'Failed to create user');
       }
 
-      setUsers([data.data, ...users]);
-      setFormData({ email: '', password: '', role: 'manager' });
-      setShowInviteForm(false);
-      router.refresh();
+      setSuccess(`초대 이메일이 ${formData.email}로 전송되었습니다. 사용자가 이메일에서 비밀번호를 설정한 후 로그인할 수 있습니다.`);
+      setFormData({ email: '', role: 'manager' });
+
+      // 페이지 새로고침하여 사용자 목록 업데이트
+      setTimeout(() => {
+        setShowInviteForm(false);
+        setSuccess('');
+        router.refresh();
+      }, 3000);
     } catch (error: any) {
       setError(error.message);
     } finally {
@@ -96,6 +102,7 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
           <h2>Invite New User</h2>
 
           {error && <div className={styles.error}>{error}</div>}
+          {success && <div className={styles.success}>{success}</div>}
 
           <div className={styles.formGroup}>
             <label>
@@ -108,21 +115,7 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
               placeholder="user@example.com"
               required
             />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label>
-              Password <span className={styles.required}>*</span>
-            </label>
-            <input
-              type="password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              placeholder="••••••••"
-              minLength={6}
-              required
-            />
-            <small>최소 6자 이상</small>
+            <small>초대 이메일이 전송됩니다. 사용자가 이메일에서 비밀번호를 설정해야 합니다.</small>
           </div>
 
           <div className={styles.formGroup}>
@@ -141,7 +134,7 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
           </div>
 
           <button type="submit" disabled={loading} className={styles.submitBtn}>
-            {loading ? 'Creating...' : 'Create User'}
+            {loading ? 'Sending Invitation...' : 'Invite User'}
           </button>
         </form>
       )}
