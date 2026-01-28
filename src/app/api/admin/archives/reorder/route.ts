@@ -30,11 +30,11 @@ export async function PUT(request: NextRequest) {
     console.log('Reorder successful:', results)
 
     return NextResponse.json({ success: true, updated: results.length })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Reorder error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to reorder archives'
     return NextResponse.json({
-      error: error?.message || 'Failed to reorder archives',
-      details: error
+      error: errorMessage,
     }, { status: 500 })
   }
 }

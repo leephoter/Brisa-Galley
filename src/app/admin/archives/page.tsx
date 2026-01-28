@@ -7,11 +7,14 @@ export default async function AdminArchivesPage() {
   const supabase = await createServerSupabaseClient();
 
   // Try to fetch with display_order, fallback to year if column doesn't exist
-  let { data: archives, error } = await supabase
+  const { data: archivesData, error: initialError } = await supabase
     .from('archives')
     .select('*')
     .order('display_order', { ascending: true })
     .order('year', { ascending: false });
+
+  let archives = archivesData;
+  let error = initialError;
 
   // If display_order column doesn't exist yet, fallback to year only
   if (error && error.message.includes('display_order')) {
@@ -23,6 +26,7 @@ export default async function AdminArchivesPage() {
       .order('created_at', { ascending: false });
 
     archives = fallback.data;
+    error = fallback.error;
   }
 
   return (

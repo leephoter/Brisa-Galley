@@ -81,7 +81,7 @@ try {
       console.log('   💡 Run: ALTER TABLE archives ADD COLUMN label VARCHAR(200);')
     }
   }
-} catch (error) {
+} catch (_error) {
   console.log('   ❌ Archives table not found or inaccessible')
   console.log('   💡 Run scripts/supabase-setup.sql in Supabase SQL Editor')
   hasErrors = true
@@ -109,7 +109,7 @@ try {
     console.log('   ⚠️  No pages found')
     console.log('   💡 Default pages should be created. Run scripts/supabase-setup.sql')
   }
-} catch (error) {
+} catch (_error) {
   console.log('   ❌ Pages table not found or inaccessible')
   console.log('   💡 Run scripts/supabase-setup.sql in Supabase SQL Editor')
   hasErrors = true
@@ -132,7 +132,7 @@ try {
       console.log(`      - ${user.email} (${user.role})`)
     })
   }
-} catch (error) {
+} catch (_error) {
   console.log('   ❌ Admin users table not found or inaccessible')
   console.log('   💡 Run scripts/supabase-setup.sql in Supabase SQL Editor')
   hasErrors = true
@@ -149,7 +149,7 @@ try {
   if (!data?.public) {
     console.log('   ⚠️  Bucket should be public for images to be accessible')
   }
-} catch (error) {
+} catch (_error) {
   console.log('   ❌ Storage bucket "archive-images" not found')
   console.log('   💡 Create bucket in Supabase Storage section')
   hasErrors = true
@@ -177,7 +177,7 @@ try {
   if (pagesError) throw pagesError
 
   console.log('   ✅ RLS policies appear to be working')
-} catch (error) {
+} catch (_error) {
   console.log('   ⚠️  Could not verify RLS policies')
   console.log('   💡 Make sure RLS policies are set up in Supabase')
 }

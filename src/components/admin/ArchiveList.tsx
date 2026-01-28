@@ -159,9 +159,10 @@ export default function ArchiveList({ archives: initialArchives }: { archives: A
 
         console.log('Reorder successful:', data)
         router.refresh()
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error('Reorder error:', error)
-        alert(`Failed to save order: ${error.message}\n\nPlease check if the display_order column exists in the archives table.`)
+        const errorMessage = error instanceof Error ? error.message : 'Failed to save order'
+        alert(`Failed to save order: ${errorMessage}\n\nPlease check if the display_order column exists in the archives table.`)
         // Revert to original order on error
         setArchives(archives)
       } finally {

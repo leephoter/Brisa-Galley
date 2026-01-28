@@ -10,7 +10,7 @@ interface AdminHeaderProps {
   }
 }
 
-export default function AdminHeader({ user }: AdminHeaderProps) {
+export default function AdminHeader(_props: AdminHeaderProps) {
   const router = useRouter()
   const supabase = createClient()
 

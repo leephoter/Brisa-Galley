@@ -52,8 +52,9 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
         setSuccess('');
         router.refresh();
       }, 3000);
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to invite user';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -79,8 +80,9 @@ export default function UserManagement({ users: initialUsers, currentUserId }: U
 
       setUsers(users.filter(u => u.id !== userId));
       router.refresh();
-    } catch (error: any) {
-      alert(`삭제 실패: ${error.message}`);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : '삭제 실패';
+      alert(`삭제 실패: ${errorMessage}`);
     } finally {
       setDeleting(null);
     }

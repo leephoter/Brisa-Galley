@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import styles from './callback.module.css';
@@ -14,26 +14,7 @@ export default function AuthCallbackPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const supabase = createClient();
 
-  useEffect(() => {
-    // URL 해시에서 토큰 정보 가져오기
-    const hashParams = new URLSearchParams(window.location.hash.substring(1));
-    const accessToken = hashParams.get('access_token');
-    const refreshToken = hashParams.get('refresh_token');
-    const type = hashParams.get('type');
-
-    if (accessToken && type === 'invite') {
-      // 초대 토큰인 경우 먼저 세션 설정
-      handleInviteSession(accessToken, refreshToken || '');
-    } else if (accessToken) {
-      // 다른 타입의 토큰 (예: 이메일 확인)
-      handleEmailConfirmation(accessToken);
-    } else {
-      setError('유효하지 않은 링크입니다.');
-      setLoading(false);
-    }
-  }, []);
-
-  async function handleInviteSession(accessToken: string, refreshToken: string) {
+  const handleInviteSession = useCallback(async (accessToken: string, refreshToken: string) => {
     try {
       // 세션 설정 (비밀번호 설정을 위해 필요)
       const { error } = await supabase.auth.setSession({
@@ -46,13 +27,14 @@ export default function AuthCallbackPage() {
       // 세션 설정 성공 - 비밀번호 설정 페이지 표시
       setIsPasswordReset(true);
       setLoading(false);
-    } catch (err: any) {
-      setError('세션 설정에 실패했습니다: ' + err.message);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : '세션 설정에 실패했습니다';
+      setError('세션 설정에 실패했습니다: ' + errorMessage);
       setLoading(false);
     }
-  }
+  }, [supabase])
 
-  async function handleEmailConfirmation(accessToken: string) {
+  const handleEmailConfirmation = useCallback(async (accessToken: string) => {
     try {
       const { error } = await supabase.auth.setSession({
         access_token: accessToken,
@@ -62,13 +44,14 @@ export default function AuthCallbackPage() {
       if (error) throw error;
 
       router.push('/admin');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to confirm email';
+      setError(errorMessage);
       setLoading(false);
     }
-  }
+  }, [supabase, router]);
 
-  async function handlePasswordSubmit(e: React.FormEvent) {
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
@@ -99,11 +82,31 @@ export default function AuthCallbackPage() {
       await supabase.auth.signOut();
 
       router.push('/login');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to set password';
+      setError(errorMessage);
       setLoading(false);
     }
-  }
+  };
+
+  useEffect(() => {
+    // URL 해시에서 토큰 정보 가져오기
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const accessToken = hashParams.get('access_token');
+    const refreshToken = hashParams.get('refresh_token');
+    const type = hashParams.get('type');
+
+    if (accessToken && type === 'invite') {
+      // 초대 토큰인 경우 먼저 세션 설정
+      handleInviteSession(accessToken, refreshToken || '');
+    } else if (accessToken) {
+      // 다른 타입의 토큰 (예: 이메일 확인)
+      handleEmailConfirmation(accessToken);
+    } else {
+      setError('유효하지 않은 링크입니다.');
+      setLoading(false);
+    }
+  }, [handleInviteSession, handleEmailConfirmation]);
 
   if (loading && !isPasswordReset) {
     return (

@@ -1,7 +1,7 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   const supabase = await createServerSupabaseClient()
 
   const { data, error } = await supabase
@@ -24,7 +24,17 @@ export async function POST(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
 
   // Prepare data for insertion
-  const insertData: any = {
+  const insertData: {
+    season: string;
+    year: number;
+    title: string;
+    description: string;
+    slug: string;
+    image_order: string[];
+    created_by: string | undefined;
+    is_published: boolean;
+    label?: string;
+  } = {
     season: body.season,
     year: body.year,
     title: body.title,

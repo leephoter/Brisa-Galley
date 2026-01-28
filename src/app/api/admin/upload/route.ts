@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     const filePath = folder ? `${folder}/${fileName}` : fileName
 
     // Upload to Supabase Storage
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from('archive-images')
       .upload(filePath, file, {
         cacheControl: '3600',
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
       path: filePath
     })
 
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Upload error:', error)
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 })
   }

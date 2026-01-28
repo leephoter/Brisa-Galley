@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { getRoleLabel, getRoleDescription } from '@/lib/permissions';
+import { getRoleLabel } from '@/lib/permissions';
 import { UserRole } from '@/types';
 import styles from './AdminSidebar.module.css';
 

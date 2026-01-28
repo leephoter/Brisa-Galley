@@ -29,7 +29,15 @@ export async function PUT(
   const supabase = await createServerSupabaseClient()
   const body = await request.json()
 
-  const updateData: any = {
+  const updateData: {
+    title: string;
+    label: string;
+    description: string;
+    slug: string;
+    content: string;
+    is_published: boolean;
+    updated_at: string;
+  } = {
     title: body.title,
     label: body.label,
     description: body.description,

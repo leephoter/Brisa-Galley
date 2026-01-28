@@ -30,7 +30,17 @@ export async function PUT(
   const body = await request.json()
 
   // Prepare data for update
-  const updateData: any = {
+  const updateData: {
+    season: string;
+    year: number;
+    title: string;
+    description: string;
+    slug: string;
+    image_order: string[];
+    is_published: boolean;
+    updated_at: string;
+    label?: string;
+  } = {
     season: body.season,
     year: body.year,
     title: body.title,
