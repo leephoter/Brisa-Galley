@@ -1,6 +1,16 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'wvzwqliptkkundzscadu.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
+  },
   turbopack: {
     rules: {
       '**/*.{tsx,jsx}': {

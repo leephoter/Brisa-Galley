@@ -40,6 +40,22 @@
   color: var(--color-white);
 }
 
+/* Loading */
+.loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.loading p {
+  font-size: var(--font-size-lg);
+  color: #666;
+  letter-spacing: 0.1em;
+}
+
 /* Not Found */
 .notFound {
   min-height: 100vh;

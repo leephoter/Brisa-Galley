@@ -23,12 +23,26 @@ export async function POST(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
+  // Prepare data for insertion
+  const insertData: any = {
+    season: body.season,
+    year: body.year,
+    title: body.title,
+    description: body.description,
+    slug: body.slug,
+    image_order: body.image_order,
+    created_by: user?.id,
+    is_published: body.is_published !== undefined ? body.is_published : true
+  }
+
+  // Add label only if it exists (for backwards compatibility)
+  if (body.label !== undefined && body.label !== null) {
+    insertData.label = body.label
+  }
+
   const { data, error } = await supabase
     .from('archives')
-    .insert({
-      ...body,
-      created_by: user?.id
-    })
+    .insert(insertData)
     .select()
     .single()
 

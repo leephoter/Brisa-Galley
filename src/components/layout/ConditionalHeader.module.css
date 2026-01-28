@@ -1,0 +1,5 @@
+.headerSkeleton {
+  width: 100%;
+  height: var(--header-height);
+  background: transparent;
+}

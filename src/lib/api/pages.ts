@@ -1,0 +1,46 @@
+import { createClient } from '@/lib/supabase/client'
+import { Page } from '@/types'
+
+export async function getPages(): Promise<Page[]> {
+  try {
+    const supabase = createClient()
+
+    const { data, error } = await supabase
+      .from('pages')
+      .select('*')
+      .eq('is_published', true)
+      .order('display_order', { ascending: true })
+
+    if (error) throw error
+
+    return data || []
+  } catch (error) {
+    console.error('Failed to fetch pages:', error)
+    // Fallback to default data
+    return [
+      { id: '1', page_key: 'place', title: 'PLACE', label: 'PLACE', slug: 'place', display_order: 1 },
+      { id: '2', page_key: 'news', title: 'NEWS', label: 'NEWS', slug: 'news', display_order: 2 },
+      { id: '3', page_key: 'call', title: 'CALL', label: 'CALL', slug: 'call', display_order: 3 }
+    ]
+  }
+}
+
+export async function getPageByKey(pageKey: string): Promise<Page | null> {
+  try {
+    const supabase = createClient()
+
+    const { data, error } = await supabase
+      .from('pages')
+      .select('*')
+      .eq('page_key', pageKey)
+      .eq('is_published', true)
+      .single()
+
+    if (error) throw error
+
+    return data
+  } catch (error) {
+    console.error('Failed to fetch page:', error)
+    return null
+  }
+}

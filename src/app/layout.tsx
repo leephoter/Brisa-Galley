@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Header from '@/components/layout/Header';
+import ConditionalHeader from '@/components/layout/ConditionalHeader';
 import './globals.css';
 import packageJson from '../../package.json';
 
@@ -11,7 +11,8 @@ export const metadata: Metadata = {
     default: 'Brisa Gallery - Contemporary Fashion & Design',
     template: '%s | Brisa Gallery',
   },
-  description: 'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
+  description:
+    'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
   keywords: [
     'Brisa',
     'SANG UN',
@@ -38,7 +39,8 @@ export const metadata: Metadata = {
     url: 'https://brisa-galley.vercel.app',
     siteName: 'Brisa Gallery',
     title: 'Brisa Gallery - Contemporary Fashion & Design',
-    description: 'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
+    description:
+      'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
     images: [
       {
         url: '/images/ogImage.png',
@@ -51,7 +53,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Brisa Gallery - Contemporary Fashion & Design',
-    description: 'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
+    description:
+      'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
     images: ['/images/ogImage.png'],
   },
   robots: {
@@ -83,9 +86,11 @@ export default function RootLayout({
     alternateName: 'BRISA / SANG UN',
     url: 'https://brisa-galley.vercel.app',
     logo: 'https://brisa-galley.vercel.app/logo.png',
-    description: 'Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
+    description:
+      'Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
     foundingDate: '2025',
     sameAs: [
+      // TODO: hglee
       // Instagram URL이 있다면 여기에 추가
     ],
   };
@@ -94,10 +99,10 @@ export default function RootLayout({
     <html lang='ko' suppressHydrationWarning>
       <body suppressHydrationWarning data-version={APP_VERSION}>
         <script
-          type="application/ld+json"
+          type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Header />
+        <ConditionalHeader />
         <main>{children}</main>
         {/* <Footer /> */}
       </body>

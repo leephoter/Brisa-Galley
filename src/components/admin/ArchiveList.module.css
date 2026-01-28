@@ -1,3 +1,27 @@
+.hint {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: #f0f9ff;
+  border-left: 3px solid #3b82f6;
+  border-radius: 4px;
+}
+
+.savingIndicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 0.75rem 1.5rem;
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -13,10 +37,36 @@
   align-items: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s ease;
+  cursor: grab;
+}
+
+.item:active {
+  cursor: grabbing;
 }
 
 .item:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dragHandle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+  color: #999;
+  cursor: grab;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dragHandle:hover {
+  color: #333;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
 }
 
 .info {

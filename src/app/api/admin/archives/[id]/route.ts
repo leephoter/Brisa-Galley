@@ -29,12 +29,26 @@ export async function PUT(
   const supabase = await createServerSupabaseClient()
   const body = await request.json()
 
+  // Prepare data for update
+  const updateData: any = {
+    season: body.season,
+    year: body.year,
+    title: body.title,
+    description: body.description,
+    slug: body.slug,
+    image_order: body.image_order,
+    is_published: body.is_published,
+    updated_at: new Date().toISOString()
+  }
+
+  // Add label only if it exists (for backwards compatibility)
+  if (body.label !== undefined && body.label !== null) {
+    updateData.label = body.label
+  }
+
   const { data, error } = await supabase
     .from('archives')
-    .update({
-      ...body,
-      updated_at: new Date().toISOString()
-    })
+    .update(updateData)
     .eq('id', id)
     .select()
     .single()
