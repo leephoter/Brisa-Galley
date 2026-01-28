@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
-import { getArchiveBySlug } from '@/lib/data';
+import { useEffect, useState } from 'react';
+import { getArchiveBySlug } from '@/lib/api/archives';
+import { Archive } from '@/types';
 import PageHero from '@/components/common/PageHero';
 import PageContainer from '@/components/common/PageContainer';
 import PageContent from '@/components/common/PageContent';
@@ -14,7 +16,34 @@ import styles from './page.module.css';
 export default function ArchiveDetailPage() {
   const params = useParams();
   const id = params.id as string;
-  const archive = getArchiveBySlug(id);
+  const [archive, setArchive] = useState<Archive | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchArchive() {
+      try {
+        const data = await getArchiveBySlug(id);
+        setArchive(data);
+      } catch (error) {
+        console.error('Failed to fetch archive:', error);
+        setArchive(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchArchive();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <PageContainer>
+        <div className={styles.loading}>
+          <p>Loading...</p>
+        </div>
+      </PageContainer>
+    );
+  }
 
   if (!archive) {
     return (
@@ -31,7 +60,7 @@ export default function ArchiveDetailPage() {
 
   return (
     <PageContainer>
-      <PageHero title={archive.title} subtitle={archive.season} />
+      <PageHero title={archive.title} subtitle={archive.description} />
 
       {/* Image Gallery - 2 Column Scroll */}
       <PageContent>

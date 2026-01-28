@@ -26,6 +26,9 @@ jobs:
         run: bun run lint
 
       - name: Build project
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
         run: bun run build:skip-version
 
       - name: Upload build artifacts

@@ -7,7 +7,10 @@
       "Bash(bun run dev)",
       "Bash(bun run build)",
       "Bash(bun run build:skip-version:*)",
-      "Bash(bun dev)"
+      "Bash(bun dev)",
+      "Bash(next build:*)",
+      "Bash(tree:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
