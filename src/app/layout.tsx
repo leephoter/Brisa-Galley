@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ConditionalHeader from '@/components/layout/ConditionalHeader';
+import { PageDataProvider } from '@/contexts/PageDataContext';
 import './globals.css';
 import packageJson from '../../package.json';
 
@@ -102,9 +103,11 @@ export default function RootLayout({
           type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <ConditionalHeader />
-        <main>{children}</main>
-        {/* <Footer /> */}
+        <PageDataProvider>
+          <ConditionalHeader />
+          <main>{children}</main>
+          {/* <Footer /> */}
+        </PageDataProvider>
       </body>
     </html>
   );

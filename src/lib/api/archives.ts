@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/client';
 import { Archive } from '@/types';
-import { archives as staticArchives } from '@/lib/data';
+import { archives as staticArchives, TABLES, COLUMNS } from '@/lib/data';
 
 export async function getArchives(): Promise<Archive[]> {
   try {
@@ -8,21 +8,21 @@ export async function getArchives(): Promise<Archive[]> {
 
     // Try with display_order first
     let { data, error } = await supabase
-      .from('archives')
+      .from(TABLES.ARCHIVES)
       .select('*')
-      .eq('is_published', true)
-      .order('display_order', { ascending: true })
-      .order('year', { ascending: false });
+      .eq(COLUMNS.ARCHIVES.IS_PUBLISHED, true)
+      .order(COLUMNS.ARCHIVES.DISPLAY_ORDER, { ascending: true })
+      .order(COLUMNS.ARCHIVES.YEAR, { ascending: false });
 
     // If display_order column doesn't exist, fallback to year only
-    if (error && error.message.includes('display_order')) {
+    if (error && error.message.includes(COLUMNS.ARCHIVES.DISPLAY_ORDER)) {
       console.log('display_order column not found, using year sorting');
       const fallback = await supabase
-        .from('archives')
+        .from(TABLES.ARCHIVES)
         .select('*')
-        .eq('is_published', true)
-        .order('year', { ascending: false })
-        .order('created_at', { ascending: false });
+        .eq(COLUMNS.ARCHIVES.IS_PUBLISHED, true)
+        .order(COLUMNS.ARCHIVES.YEAR, { ascending: false })
+        .order(COLUMNS.ARCHIVES.CREATED_AT, { ascending: false });
 
       data = fallback.data;
       error = fallback.error;
@@ -55,14 +55,18 @@ export async function getArchiveBySlug(slug: string): Promise<Archive | null> {
     const supabase = createClient();
 
     const { data, error } = await supabase
-      .from('archives')
+      .from(TABLES.ARCHIVES)
       .select('*')
-      .eq('slug', slug)
-      .eq('is_published', true)
-      .single();
+      .eq(COLUMNS.ARCHIVES.SLUG, slug)
+      .eq(COLUMNS.ARCHIVES.IS_PUBLISHED, true)
+      .maybeSingle();
 
     if (error) throw error;
-    if (!data) throw new Error('Archive not found');
+
+    // If no data from Supabase, fallback to static data
+    if (!data) {
+      return staticArchives.find((a) => a.slug === slug) || null;
+    }
 
     return {
       id: data.id,

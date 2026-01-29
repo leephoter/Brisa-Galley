@@ -22,6 +22,7 @@ interface ArchiveFormProps {
 export default function ArchiveForm({ initialData }: ArchiveFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [deletingAllImages, setDeletingAllImages] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     season: initialData?.season || '',
@@ -61,6 +62,54 @@ export default function ArchiveForm({ initialData }: ArchiveFormProps) {
       setError(error instanceof Error ? error.message : 'Failed to save archive');
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleDeleteAllImages() {
+    if (formData.image_order.length === 0) return;
+
+    if (
+      !confirm(
+        `${formData.image_order.length} 개의 이미지를 삭제합니다. \n 이 작업은 되돌릴 수 없습니다.`,
+      )
+    )
+      return;
+
+    setDeletingAllImages(true);
+    setError(null);
+
+    try {
+      // Delete all images from storage
+      const deletePromises = formData.image_order.map((imageUrl) => {
+        // Extract path from URL
+        const url = new URL(imageUrl);
+        const pathParts = url.pathname.split('/');
+        const path = pathParts.slice(-2).join('/'); // folder/filename
+
+        return fetch(`/api/admin/upload?path=${encodeURIComponent(path)}`, {
+          method: 'DELETE',
+        });
+      });
+
+      const results = await Promise.all(deletePromises);
+      const failedDeletes = results.filter((res) => !res.ok);
+
+      if (failedDeletes.length > 0) {
+        throw new Error(`Failed to delete ${failedDeletes.length} images from storage`);
+      }
+
+      // Clear image_order in form
+      setFormData((prev) => ({
+        ...prev,
+        image_order: [],
+      }));
+
+      alert('모든 이미지가 삭제되었습니다.');
+    } catch (error) {
+      console.error('Delete all images error:', error);
+      setError(error instanceof Error ? error.message : 'Failed to delete all images');
+    } finally {
+      setDeletingAllImages(false);
     }
   }
 
@@ -154,7 +203,21 @@ export default function ArchiveForm({ initialData }: ArchiveFormProps) {
       </div>
 
       <div className={styles.section}>
-        <h2>Images</h2>
+        <div className={styles.sectionHeader}>
+          <h2>Images</h2>
+          {formData.image_order.length > 0 && (
+            <button
+              type='button'
+              onClick={handleDeleteAllImages}
+              disabled={deletingAllImages || loading}
+              className={styles.deleteAllImagesBtn}
+            >
+              {deletingAllImages
+                ? 'Deleting All...'
+                : `Delete All (${formData.image_order.length})`}
+            </button>
+          )}
+        </div>
 
         {formData.image_order.length > 0 && (
           <SortableImageGrid

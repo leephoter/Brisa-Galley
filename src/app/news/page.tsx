@@ -9,7 +9,11 @@ import styles from './page.module.css';
 export default function NEWSPage() {
   return (
     <PageContainer>
-      <PageHero title='NEWS' subtitle='Crafting timeless pieces for the modern wardrobe' />
+      <PageHero
+        pageKey="news"
+        defaultTitle="NEWS"
+        defaultSubtitle="Crafting timeless pieces for the modern wardrobe"
+      />
 
       {/* Story Section */}
       <PageContent>

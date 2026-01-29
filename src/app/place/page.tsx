@@ -9,7 +9,11 @@ import styles from './page.module.css';
 export default function PLACEPage() {
   return (
     <PageContainer>
-      <PageHero title='PLACE' subtitle='Find our collections at these select locations worldwide' />
+      <PageHero
+        pageKey="place"
+        defaultTitle="PLACE"
+        defaultSubtitle="Find our collections at these select locations worldwide"
+      />
 
       <PageContent>
         <motion.div
