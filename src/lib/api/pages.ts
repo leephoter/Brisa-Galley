@@ -1,15 +1,16 @@
 import { createClient } from '@/lib/supabase/client'
 import { Page } from '@/types'
+import { TABLES, COLUMNS } from '@/lib/data'
 
 export async function getPages(): Promise<Page[]> {
   try {
     const supabase = createClient()
 
     const { data, error } = await supabase
-      .from('pages')
+      .from(TABLES.PAGES)
       .select('*')
-      .eq('is_published', true)
-      .order('display_order', { ascending: true })
+      .eq(COLUMNS.PAGES.IS_PUBLISHED, true)
+      .order(COLUMNS.PAGES.DISPLAY_ORDER, { ascending: true })
 
     if (error) throw error
 
@@ -30,11 +31,11 @@ export async function getPageByKey(pageKey: string): Promise<Page | null> {
     const supabase = createClient()
 
     const { data, error } = await supabase
-      .from('pages')
+      .from(TABLES.PAGES)
       .select('*')
-      .eq('page_key', pageKey)
-      .eq('is_published', true)
-      .single()
+      .eq(COLUMNS.PAGES.PAGE_KEY, pageKey)
+      .eq(COLUMNS.PAGES.IS_PUBLISHED, true)
+      .maybeSingle()
 
     if (error) throw error
 

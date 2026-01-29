@@ -1,14 +1,23 @@
 import type { NextConfig } from 'next';
 
+// Supabase hostname from environment variable
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseHostname = supabaseUrl ? new URL(supabaseUrl).hostname : '';
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'wvzwqliptkkundzscadu.supabase.co',
-        port: '',
-        pathname: '/storage/v1/object/public/**',
-      },
+      // Dynamically add Supabase hostname if available
+      ...(supabaseHostname
+        ? [
+            {
+              protocol: 'https' as const,
+              hostname: supabaseHostname,
+              port: '',
+              pathname: '/storage/v1/object/public/**',
+            },
+          ]
+        : []),
     ],
   },
   turbopack: {

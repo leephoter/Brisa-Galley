@@ -101,6 +101,7 @@ function SortableArchiveItem({
 export default function ArchiveList({ archives: initialArchives }: { archives: Archive[] }) {
   const router = useRouter()
   const [deleting, setDeleting] = useState<string | null>(null)
+  const [deletingAll, setDeletingAll] = useState(false)
   const [archives, setArchives] = useState(initialArchives)
   const [saving, setSaving] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -142,8 +143,6 @@ export default function ArchiveList({ archives: initialArchives }: { archives: A
       try {
         const reorderedIds = newOrderedArchives.map((archive) => archive.id)
 
-        console.log('Saving new order:', reorderedIds)
-
         const response = await fetch('/api/admin/archives/reorder', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -157,7 +156,6 @@ export default function ArchiveList({ archives: initialArchives }: { archives: A
           throw new Error(data.error || 'Failed to save order')
         }
 
-        console.log('Reorder successful:', data)
         router.refresh()
       } catch (error: unknown) {
         console.error('Reorder error:', error)
@@ -191,6 +189,37 @@ export default function ArchiveList({ archives: initialArchives }: { archives: A
       alert('Failed to delete archive')
     } finally {
       setDeleting(null)
+    }
+  }
+
+  async function handleDeleteAll() {
+    if (!confirm(`Delete ALL ${archives.length} archives? This action cannot be undone!`)) return
+    if (!confirm('Are you absolutely sure? This will delete ALL archives and their images permanently!')) return
+
+    setDeletingAll(true)
+
+    try {
+      // Delete all archives one by one
+      const deletePromises = archives.map((archive) =>
+        fetch(`/api/admin/archives/${archive.id}`, {
+          method: 'DELETE',
+        })
+      )
+
+      const results = await Promise.all(deletePromises)
+
+      const failedDeletes = results.filter((res) => !res.ok)
+      if (failedDeletes.length > 0) {
+        throw new Error(`Failed to delete ${failedDeletes.length} archives`)
+      }
+
+      router.refresh()
+    } catch (error) {
+      console.error('Delete all error:', error)
+      alert('Failed to delete all archives. Some may have been deleted.')
+      router.refresh()
+    } finally {
+      setDeletingAll(false)
     }
   }
 
@@ -241,6 +270,17 @@ export default function ArchiveList({ archives: initialArchives }: { archives: A
 
   return (
     <>
+      <div className={styles.listHeader}>
+        <p className={styles.listCount}>{archives.length} archive(s)</p>
+        <button
+          onClick={handleDeleteAll}
+          disabled={deletingAll || deleting !== null}
+          className={styles.deleteAllBtn}
+        >
+          {deletingAll ? 'Deleting All...' : 'Delete All'}
+        </button>
+      </div>
+
       {saving && (
         <div className={styles.savingIndicator}>
           Saving order...

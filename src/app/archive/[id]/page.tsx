@@ -65,16 +65,20 @@ export default function ArchiveDetailPage() {
       {/* Image Gallery - 2 Column Scroll */}
       <PageContent>
         <div className={styles.imageGrid}>
-          {archive.images.map((image, index) => (
-            <ImageCard key={index} image={image} index={index} title={archive.title} />
-          ))}
+          {archive.images.length ? (
+            archive.images.map((image, index) => (
+              <ImageCard key={index} image={image} index={index} title={archive.title} />
+            ))
+          ) : (
+            <ImageCard index={0} title={'Comming Soon...'}></ImageCard>
+          )}
         </div>
       </PageContent>
     </PageContainer>
   );
 }
 
-function ImageCard({ image, index, title }: { image: string; index: number; title: string }) {
+function ImageCard({ image, index, title }: { image?: string; index: number; title: string }) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -89,13 +93,17 @@ function ImageCard({ image, index, title }: { image: string; index: number; titl
       transition={{ duration: 0.6, delay: (index % 2) * 0.1 }}
     >
       <div className={styles.imageWrapper}>
-        <Image
-          src={image}
-          alt={`${title} - Image ${index + 1}`}
-          fill
-          className={styles.image}
-          priority={index < 4}
-        />
+        {image ? (
+          <Image
+            src={image}
+            alt={`${title} - Image ${index + 1}`}
+            fill
+            className={styles.image}
+            priority={index < 4}
+          />
+        ) : (
+          <p className={styles.noImage}>{title}</p>
+        )}
       </div>
     </motion.div>
   );

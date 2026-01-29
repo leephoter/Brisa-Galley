@@ -10,32 +10,7 @@ export const archives: Archive[] = [
     description: 'Spring Summer 2026 Collection',
     slug: '2026-ss',
     images: [
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
-      '/images/archive/2026-ss-01.jpg',
-      '/images/archive/2026-ss-02.jpg',
+      // '/images/archive/2026-ss-01.jpg',
     ],
   },
   {
@@ -236,3 +211,57 @@ export const PLACE: Stockist[] = [
     email: 'london@brisa.com',
   },
 ];
+
+// ==================== Supabase Constants ====================
+
+// Storage
+export const STORAGE = {
+  BUCKET_NAME: 'brisa-images',
+  PUBLIC_PATH: '/storage/v1/object/public',
+} as const;
+
+// Database Tables
+export const TABLES = {
+  ARCHIVES: 'archives',
+  ADMIN_USERS: 'admin_users',
+  PAGES: 'pages',
+} as const;
+
+// Table Columns
+export const COLUMNS = {
+  ARCHIVES: {
+    ID: 'id',
+    SEASON: 'season',
+    YEAR: 'year',
+    TITLE: 'title',
+    LABEL: 'label',
+    DESCRIPTION: 'description',
+    SLUG: 'slug',
+    IMAGE_ORDER: 'image_order',
+    CREATED_AT: 'created_at',
+    UPDATED_AT: 'updated_at',
+    CREATED_BY: 'created_by',
+    IS_PUBLISHED: 'is_published',
+    DISPLAY_ORDER: 'display_order',
+  },
+  ADMIN_USERS: {
+    ID: 'id',
+    EMAIL: 'email',
+    ROLE: 'role',
+    CREATED_AT: 'created_at',
+    CONFIRMED_AT: 'confirmed_at',
+  },
+  PAGES: {
+    ID: 'id',
+    PAGE_KEY: 'page_key',
+    TITLE: 'title',
+    LABEL: 'label',
+    DESCRIPTION: 'description',
+    SLUG: 'slug',
+    CONTENT: 'content',
+    IS_PUBLISHED: 'is_published',
+    DISPLAY_ORDER: 'display_order',
+    CREATED_AT: 'created_at',
+    UPDATED_AT: 'updated_at',
+  },
+} as const;

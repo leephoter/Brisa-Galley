@@ -9,7 +9,11 @@ import styles from './page.module.css';
 export default function CALLPage() {
   return (
     <PageContainer>
-      <PageHero title='CALL' subtitle="We'd love to hear from you" />
+      <PageHero
+        pageKey="call"
+        defaultTitle="CALL"
+        defaultSubtitle="We'd love to hear from you"
+      />
 
       <PageContent>
         <motion.section

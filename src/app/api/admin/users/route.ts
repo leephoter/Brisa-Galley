@@ -36,7 +36,6 @@ export async function GET() {
       throw error;
     }
 
-    console.log('Fetched admin_users from API:', data);
     return NextResponse.json({ data });
   } catch (error: unknown) {
     console.error('Failed to fetch users:', error);

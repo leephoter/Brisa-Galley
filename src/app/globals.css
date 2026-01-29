@@ -26,7 +26,7 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: var(--font-size-base);
   letter-spacing: var(--letter-spacing);
-  line-height: 1.6;
+  /* line-height: 1.6; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

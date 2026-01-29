@@ -1,6 +1,8 @@
 import { createServerClient } from '@supabase/ssr';
+import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { TABLES, COLUMNS } from '@/lib/data';
 
 export async function middleware(request: NextRequest) {
   // Skip middleware for login page
@@ -16,6 +18,7 @@ export async function middleware(request: NextRequest) {
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key';
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || 'placeholder-service-key';
 
   const supabase = createServerClient(
     supabaseUrl,
@@ -35,6 +38,14 @@ export async function middleware(request: NextRequest) {
     },
   );
 
+  // Admin client for RLS bypass
+  const adminClient = createClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -46,11 +57,11 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/login', request.url));
     }
 
-    // Check admin authorization
-    const { data: adminUser } = await supabase
-      .from('admin_users')
-      .select('role')
-      .eq('id', user.id)
+    // Check admin authorization using admin client (RLS bypass)
+    const { data: adminUser } = await adminClient
+      .from(TABLES.ADMIN_USERS)
+      .select(COLUMNS.ADMIN_USERS.ROLE)
+      .eq(COLUMNS.ADMIN_USERS.ID, user.id)
       .single();
 
     if (!adminUser) {

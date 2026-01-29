@@ -10,6 +10,7 @@
 
 .heroContent h1 {
   font-size: var(--font-size-3xl);
+  height: var(--font-size-3xl);
   font-weight: 300;
   letter-spacing: 0.15em;
   margin-bottom: 16px;
@@ -17,8 +18,31 @@
 
 .heroContent p {
   font-size: var(--font-size-base);
+  height: var(--font-size-base);
   color: var(--color-gray);
   letter-spacing: 0.05em;
+}
+
+.skeletonTitle {
+  height: var(--font-size-3xl);
+  width: 280px;
+  max-width: 100%;
+  margin-bottom: 16px;
+}
+
+.skeletonSubtitle {
+  height: var(--font-size-base);
+  width: 400px;
+  max-width: 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* Responsive */
@@ -29,11 +53,23 @@
 
   .heroContent h1 {
     font-size: var(--font-size-2xl);
+    height: var(--font-size-2xl);
     letter-spacing: 0.1em;
   }
 
   .heroContent p {
     font-size: var(--font-size-sm);
+    height: var(--font-size-sm);
+  }
+
+  .skeletonTitle {
+    height: var(--font-size-2xl);
+    width: 200px;
+  }
+
+  .skeletonSubtitle {
+    height: var(--font-size-sm);
+    width: 280px;
   }
 }
 

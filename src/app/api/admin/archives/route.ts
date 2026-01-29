@@ -1,14 +1,15 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { TABLES, COLUMNS } from '@/lib/data'
 
 export async function GET(_request: NextRequest) {
   const supabase = await createServerSupabaseClient()
 
   const { data, error } = await supabase
-    .from('archives')
+    .from(TABLES.ARCHIVES)
     .select('*')
-    .order('year', { ascending: false })
-    .order('created_at', { ascending: false })
+    .order(COLUMNS.ARCHIVES.YEAR, { ascending: false })
+    .order(COLUMNS.ARCHIVES.CREATED_AT, { ascending: false })
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest) {
   }
 
   const { data, error } = await supabase
-    .from('archives')
+    .from(TABLES.ARCHIVES)
     .insert(insertData)
     .select()
     .single()
