@@ -93,7 +93,8 @@ async function main() {
     },
   ]);
 
-  const newPatch = parseInt(patch) || currentPatch;
+  const parsedPatch = parseInt(patch);
+  const newPatch = isNaN(parsedPatch) ? currentPatch : parsedPatch;
   const newVersion = `${newMajor}.${newMinor}.${newPatch}`;
 
   console.log(`\n📦 새 버전: ${currentVersion} → ${newVersion}`);
