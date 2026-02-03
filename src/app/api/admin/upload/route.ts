@@ -16,9 +16,9 @@ export async function POST(request: NextRequest) {
     }
 
     // File validation
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    const maxSize = 100 * 1024 * 1024; // 100MB
     if (file.size > maxSize) {
-      return NextResponse.json({ error: 'File too large (max 10MB)' }, { status: 400 });
+      return NextResponse.json({ error: 'File too large (max 100MB)' }, { status: 400 });
     }
 
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];

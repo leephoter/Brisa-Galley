@@ -265,3 +265,16 @@ export const COLUMNS = {
     UPDATED_AT: 'updated_at',
   },
 } as const;
+
+// 상수값
+export const CONSTANTS = {
+  E_MAIL: 'brisa562@naver.com',
+  PHONE_NUMBER: '4972-6335',
+  PLEASE_WAIT_MESSAGE: 'Coming Soon...',
+  BASE_MOTION: {
+    INITIAL: { opacity: 0, y: 10 },
+    WHILE_IN_VIEW: { opacity: 1, y: 0 },
+    VIEWPORT: { once: true },
+    TRANSITION: (delay: number = 0) => ({ duration: 0.4, delay }),
+  },
+};

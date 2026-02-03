@@ -14,7 +14,11 @@ export async function getPages(): Promise<Page[]> {
 
     if (error) throw error
 
-    return data || []
+    // Parse JSON content if it exists
+    return (data || []).map(page => ({
+      ...page,
+      content: typeof page.content === 'string' && page.content ? JSON.parse(page.content) : page.content
+    }))
   } catch (error) {
     console.error('Failed to fetch pages:', error)
     // Fallback to default data
@@ -39,7 +43,13 @@ export async function getPageByKey(pageKey: string): Promise<Page | null> {
 
     if (error) throw error
 
-    return data
+    if (!data) return null
+
+    // Parse JSON content if it exists
+    return {
+      ...data,
+      content: typeof data.content === 'string' && data.content ? JSON.parse(data.content) : data.content
+    }
   } catch (error) {
     console.error('Failed to fetch page:', error)
     return null

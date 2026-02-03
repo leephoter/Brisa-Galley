@@ -37,10 +37,12 @@ function SortableArchiveItem({
   archive,
   onDelete,
   deleting,
+  saving,
 }: {
   archive: Archive
   onDelete: (id: string, title: string) => void
   deleting: string | null
+  saving: boolean
 }) {
   const {
     attributes,
@@ -49,17 +51,21 @@ function SortableArchiveItem({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: archive.id })
+  } = useSortable({ id: archive.id, disabled: saving })
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
+    opacity: isDragging ? 0.5 : saving ? 0.6 : 1,
   }
 
   return (
-    <div ref={setNodeRef} style={style} className={styles.item}>
-      <div className={styles.dragHandle} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} className={`${styles.item} ${saving ? styles.itemDisabled : ''}`}>
+      <div
+        className={`${styles.dragHandle} ${saving ? styles.dragHandleDisabled : ''}`}
+        {...(saving ? {} : attributes)}
+        {...(saving ? {} : listeners)}
+      >
         <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
           <circle cx="7" cy="5" r="1.5" />
           <circle cx="13" cy="5" r="1.5" />
@@ -88,7 +94,7 @@ function SortableArchiveItem({
         </Link>
         <button
           onClick={() => onDelete(archive.id, archive.title)}
-          disabled={deleting === archive.id}
+          disabled={deleting === archive.id || saving}
           className={styles.deleteBtn}
         >
           {deleting === archive.id ? 'Deleting...' : 'Delete'}
@@ -283,19 +289,23 @@ export default function ArchiveList({ archives: initialArchives }: { archives: A
 
       {saving && (
         <div className={styles.savingIndicator}>
+          <div className={styles.spinner}></div>
           Saving order...
         </div>
       )}
-      <p className={styles.hint}>Drag to reorder archives (affects header menu order)</p>
+      <p className={styles.hint}>
+        {saving ? 'Please wait while saving...' : 'Drag to reorder archives (affects header menu order)'}
+      </p>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={archives.map((a) => a.id)} strategy={verticalListSortingStrategy}>
-          <div className={styles.list}>
+          <div className={`${styles.list} ${saving ? styles.listDisabled : ''}`}>
             {archives.map((archive) => (
               <SortableArchiveItem
                 key={archive.id}
                 archive={archive}
                 onDelete={handleDelete}
                 deleting={deleting}
+                saving={saving}
               />
             ))}
           </div>

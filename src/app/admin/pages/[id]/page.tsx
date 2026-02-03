@@ -1,6 +1,7 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import PageForm from '@/components/admin/PageForm'
+import { TABLES, COLUMNS } from '@/lib/data'
 import styles from './edit.module.css'
 
 export const dynamic = 'force-dynamic';
@@ -15,13 +16,22 @@ export default async function EditPagePage({
   const supabase = await createServerSupabaseClient()
 
   const { data: page, error } = await supabase
-    .from('pages')
+    .from(TABLES.PAGES)
     .select('*')
-    .eq('id', id)
+    .eq(COLUMNS.PAGES.ID, id)
     .single()
 
   if (error || !page) {
     notFound()
+  }
+
+  // Parse JSON content if it exists
+  const parsedPage = {
+    ...page,
+    content:
+      typeof page.content === 'string' && page.content
+        ? JSON.parse(page.content)
+        : page.content,
   }
 
   return (
@@ -30,7 +40,7 @@ export default async function EditPagePage({
         <h1>Edit {page.page_key.toUpperCase()} Page</h1>
         <p className={styles.subtitle}>Update page settings and content</p>
       </div>
-      <PageForm page={page} />
+      <PageForm page={parsedPage} />
     </div>
   )
 }

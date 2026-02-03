@@ -4,51 +4,56 @@ import { motion } from 'framer-motion';
 import PageHero from '@/components/common/PageHero';
 import PageContainer from '@/components/common/PageContainer';
 import PageContent from '@/components/common/PageContent';
+import { usePageData } from '@/contexts/PageDataContext';
 import styles from './page.module.css';
+import { CONSTANTS } from '@/lib/data';
 
 export default function NEWSPage() {
+  const { pageData } = usePageData('news');
+  const content = pageData?.content;
+
   return (
     <PageContainer>
       <PageHero
-        pageKey="news"
-        defaultTitle="NEWS"
-        defaultSubtitle="Crafting timeless pieces for the modern wardrobe"
+        pageKey='news'
+        defaultTitle='NEWS'
+        defaultSubtitle='Crafting timeless pieces for the modern wardrobe'
       />
 
-      {/* Story Section */}
       <PageContent>
-        <motion.div
-          className={styles.storyContent}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2>Notification</h2>
-          <div className={styles.text}>
-            <p>
-              {`Kim Sang-min has a face that makes you want to punch him. So, sooner or later, someone will hit him.`}
-            </p>
-            <p>{`But I won't hit him because I'm a nice guy.`}</p>
-          </div>
-        </motion.div>
-      </PageContent>
-
-      {/* Vision Section */}
-      <PageContent>
-        <motion.div
-          className={styles.visionContent}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2>Notification</h2>
-          <p>
-            {`Kim Sang-min has a face that makes you want to punch him. So, sooner or later, someone will hit him.`}
-          </p>
-          <p>{`But I won't hit him because I'm a nice guy.`}</p>
-        </motion.div>
+        <div className={styles.newsContainer}>
+          {content && content.sections && content.sections.length > 0 ? (
+            content.sections.map((section, index) => (
+              <motion.div
+                key={section.id}
+                className={styles.storyContent}
+                initial={CONSTANTS.BASE_MOTION.INITIAL}
+                whileInView={CONSTANTS.BASE_MOTION.WHILE_IN_VIEW}
+                viewport={CONSTANTS.BASE_MOTION.VIEWPORT}
+                transition={CONSTANTS.BASE_MOTION.TRANSITION(index)}
+              >
+                {section.title && <h2>{section.title}</h2>}
+                {section.paragraphs && section.paragraphs.length > 0 && (
+                  <div className={styles.text}>
+                    {section.paragraphs.map((paragraph, pIndex) => (
+                      <p key={pIndex}>{paragraph}</p>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            ))
+          ) : (
+            <motion.div
+              className={styles.storyContent}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1>{CONSTANTS.PLEASE_WAIT_MESSAGE}</h1>
+            </motion.div>
+          )}
+        </div>
       </PageContent>
     </PageContainer>
   );
