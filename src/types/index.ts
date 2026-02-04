@@ -78,6 +78,16 @@ export interface AdminUser {
   created_at: string;
 }
 
+export interface PageSection {
+  id: string;
+  title: string;
+  paragraphs: string[];
+}
+
+export interface PageContent {
+  sections: PageSection[];
+}
+
 export interface Page {
   id: string;
   page_key: 'place' | 'news' | 'call';
@@ -85,7 +95,7 @@ export interface Page {
   label?: string;
   description?: string;
   slug: string;
-  content?: string;
+  content?: PageContent | null;
   is_published?: boolean;
   display_order?: number;
   created_at?: string;

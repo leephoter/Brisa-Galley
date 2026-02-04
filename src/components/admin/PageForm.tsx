@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { PageContent } from '@/types'
+import PageContentEditor from './PageContentEditor'
 import styles from './PageForm.module.css'
 
 interface PageFormProps {
@@ -12,7 +14,7 @@ interface PageFormProps {
     label?: string
     description?: string
     slug: string
-    content?: string
+    content?: PageContent | null
     is_published?: boolean
   }
 }
@@ -26,7 +28,7 @@ export default function PageForm({ page }: PageFormProps) {
     label: page.label || '',
     description: page.description || '',
     slug: page.slug || '',
-    content: page.content || '',
+    content: page.content || null,
     is_published: page.is_published !== undefined ? page.is_published : true
   })
 
@@ -128,13 +130,11 @@ export default function PageForm({ page }: PageFormProps) {
 
         <div className={styles.formGroup}>
           <label>Content</label>
-          <textarea
-            value={formData.content}
-            onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-            rows={6}
-            placeholder="페이지 내용"
+          <PageContentEditor
+            content={formData.content}
+            onChange={(content) => setFormData(prev => ({ ...prev, content }))}
           />
-          <small>페이지 내용 (선택사항, 향후 사용)</small>
+          <small>페이지 내용 섹션 (제목과 단락을 추가/수정할 수 있습니다)</small>
         </div>
 
         <div className={styles.formGroup}>

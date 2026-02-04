@@ -90,7 +90,7 @@ export default function ImageUploader({
                 : 'Drag & drop images, or click to select'}
             </p>
             <p className={styles.dropzoneHint}>
-              Supports JPG, PNG, WebP (max 10MB per file)
+              Supports JPG, PNG, WebP (max 100MB per file)
             </p>
           </div>
         )}

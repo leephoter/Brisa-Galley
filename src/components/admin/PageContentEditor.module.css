@@ -1,0 +1,178 @@
+.editor {
+  border: 1px solid var(--border-color, #e1e1e1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: var(--background-light, #fafafa);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.addSectionBtn {
+  padding: 0.5rem 1rem;
+  background-color: var(--text-color, #000);
+  color: var(--background-color, #fff);
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.addSectionBtn:hover {
+  opacity: 0.8;
+}
+
+.empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-gray, #666);
+}
+
+.section {
+  background-color: var(--background-color, #fff);
+  border: 1px solid var(--border-color, #e1e1e1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color, #e1e1e1);
+}
+
+.sectionNumber {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-color, #000);
+}
+
+.removeBtn {
+  width: 28px;
+  height: 28px;
+  background-color: #fee;
+  color: #c33;
+  border: 1px solid #fcc;
+  border-radius: 4px;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.removeBtn:hover {
+  background-color: #fdd;
+  border-color: #fbb;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color, #e1e1e1);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--text-color, #000);
+}
+
+.paragraphs {
+  margin-top: 1.5rem;
+}
+
+.paragraphsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.paragraphsHeader label {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.addParagraphBtn {
+  padding: 0.375rem 0.75rem;
+  background-color: transparent;
+  color: var(--text-color, #000);
+  border: 1px solid var(--border-color, #e1e1e1);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.addParagraphBtn:hover {
+  background-color: var(--background-light, #fafafa);
+  border-color: var(--text-color, #000);
+}
+
+.paragraph {
+  margin-bottom: 0.75rem;
+}
+
+.paragraphHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.paragraphLabel {
+  font-size: 0.75rem;
+  color: var(--color-gray, #666);
+  font-weight: 500;
+}
+
+.paragraph textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color, #e1e1e1);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.paragraph textarea:focus {
+  outline: none;
+  border-color: var(--text-color, #000);
+}

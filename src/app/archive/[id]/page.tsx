@@ -12,6 +12,7 @@ import PageHero from '@/components/common/PageHero';
 import PageContainer from '@/components/common/PageContainer';
 import PageContent from '@/components/common/PageContent';
 import styles from './page.module.css';
+import { CONSTANTS } from '@/lib/data';
 
 export default function ArchiveDetailPage() {
   const params = useParams();
@@ -70,7 +71,7 @@ export default function ArchiveDetailPage() {
               <ImageCard key={index} image={image} index={index} title={archive.title} />
             ))
           ) : (
-            <ImageCard index={0} title={'Comming Soon...'}></ImageCard>
+            <ImageCard index={0} title={CONSTANTS.PLEASE_WAIT_MESSAGE}></ImageCard>
           )}
         </div>
       </PageContent>
