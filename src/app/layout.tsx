@@ -9,8 +9,8 @@ const APP_VERSION = packageJson.version;
 export const metadata: Metadata = {
   metadataBase: new URL('https://brisa-galley.vercel.app'),
   title: {
-    default: 'Brisa Gallery - Contemporary Fashion & Design',
-    template: '%s | Brisa Gallery',
+    default: 'Brisa Archives - Contemporary Fashion & Design',
+    template: '%s | Brisa Archives',
   },
   description:
     'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     'style gallery',
     'fashion exhibition',
   ],
-  authors: [{ name: 'Brisa Gallery', url: 'https://brisa-galley.vercel.app' }],
-  creator: 'Brisa Gallery',
-  publisher: 'Brisa Gallery',
+  authors: [{ name: 'Brisa Archives', url: 'https://brisa-galley.vercel.app' }],
+  creator: 'Brisa Archives',
+  publisher: 'Brisa Archives',
   formatDetection: {
     email: false,
     address: false,
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ko_KR',
     url: 'https://brisa-galley.vercel.app',
-    siteName: 'Brisa Gallery',
-    title: 'Brisa Gallery - Contemporary Fashion & Design',
+    siteName: 'Brisa Archives',
+    title: 'Brisa Archives - Contemporary Fashion & Design',
     description:
       'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
     images: [
@@ -47,13 +47,13 @@ export const metadata: Metadata = {
         url: '/images/ogImage.png',
         width: 1200,
         height: 630,
-        alt: 'Brisa Gallery',
+        alt: 'Brisa Archives',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Brisa Gallery - Contemporary Fashion & Design',
+    title: 'Brisa Archives - Contemporary Fashion & Design',
     description:
       'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
     images: ['/images/ogImage.png'],
@@ -83,7 +83,7 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Brisa Gallery',
+    name: 'Brisa Archives',
     alternateName: 'BRISA / SANG UN',
     url: 'https://brisa-galley.vercel.app',
     logo: 'https://brisa-galley.vercel.app/logo.png',

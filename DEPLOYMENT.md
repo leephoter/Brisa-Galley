@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This guide covers multiple deployment options for the Brisa Gallery project.
+This guide covers multiple deployment options for the Brisa Archives project.
 
 ## Table of Contents
 
