@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     'Discover our curated selection of contemporary fashion archive. High-quality pieces designed to last. Browse timeless designs and modern collections.',
   keywords: ['fashion archive', 'contemporary fashion', 'Brisa collection', 'timeless design'],
   openGraph: {
-    title: 'Archive | Brisa Gallery',
+    title: 'Archive | Brisa Archives',
     description: 'Discover our curated selection of contemporary fashion archive.',
     url: 'https://brisa-galley.vercel.app/archive',
     type: 'website',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Archive | Brisa Gallery',
+    title: 'Archive | Brisa Archives',
     description: 'Discover our curated selection of contemporary fashion archive.',
     images: ['/images/ogImage.png'],
   },

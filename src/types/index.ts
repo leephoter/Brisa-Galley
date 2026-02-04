@@ -26,16 +26,6 @@ export interface Product {
   inStock: boolean;
 }
 
-export interface Stockist {
-  id: string;
-  name: string;
-  address: string;
-  city: string;
-  country: string;
-  phone?: string;
-  email?: string;
-}
-
 export interface Archive {
   id: string;
   season: string;
@@ -50,23 +40,6 @@ export interface Archive {
   updated_at?: string;
   is_published?: boolean;
   display_order?: number;
-}
-
-// Supabase table type
-export interface ArchiveTable {
-  id: string;
-  season: string;
-  year: number;
-  title: string;
-  label: string | null;
-  description: string | null;
-  slug: string;
-  image_order: string[];
-  created_at: string;
-  updated_at: string;
-  created_by: string | null;
-  is_published: boolean;
-  display_order: number;
 }
 
 export type UserRole = 'master' | 'manager';

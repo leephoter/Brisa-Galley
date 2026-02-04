@@ -5,8 +5,12 @@ import type { NextRequest } from 'next/server';
 import { TABLES, COLUMNS } from '@/lib/data';
 
 export async function middleware(request: NextRequest) {
-  // Skip middleware for login page
-  if (request.nextUrl.pathname === '/login') {
+  // Skip middleware for login, auth callback pages, and API routes
+  if (
+    request.nextUrl.pathname === '/login' ||
+    request.nextUrl.pathname.startsWith('/auth/callback') ||
+    request.nextUrl.pathname.startsWith('/api/auth/callback')
+  ) {
     return NextResponse.next();
   }
 
@@ -74,5 +78,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/login'],
+  matcher: ['/admin/:path*', '/login', '/auth/callback', '/api/auth/callback'],
 };

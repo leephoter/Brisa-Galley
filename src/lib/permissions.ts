@@ -19,30 +19,6 @@ export const PERMISSIONS = {
 } as const;
 
 /**
- * 사용자가 특정 권한을 가지고 있는지 확인
- */
-export function hasPermission(
-  userRole: UserRole,
-  permission: keyof typeof PERMISSIONS
-): boolean {
-  return (PERMISSIONS[permission] as readonly UserRole[]).includes(userRole);
-}
-
-/**
- * 사용자가 master 레벨인지 확인
- */
-export function isMaster(userRole: UserRole): boolean {
-  return userRole === 'master';
-}
-
-/**
- * 사용자가 manager 레벨인지 확인
- */
-export function isManager(userRole: UserRole): boolean {
-  return userRole === 'manager';
-}
-
-/**
  * 역할에 따른 설명 반환
  */
 export function getRoleDescription(role: UserRole): string {
