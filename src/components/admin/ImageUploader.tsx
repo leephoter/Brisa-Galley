@@ -2,6 +2,9 @@
 
 import { useState, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { nanoid } from 'nanoid'
+import { createClient } from '@/lib/supabase/client'
+import { STORAGE } from '@/lib/data'
 import styles from './ImageUploader.module.css'
 
 interface ImageUploaderProps {
@@ -25,24 +28,44 @@ export default function ImageUploader({
     setProgress(0)
     setError(null)
 
+    const supabase = createClient()
+
     const uploadPromises = acceptedFiles.map(async (file, index) => {
-      const formData = new FormData()
-      formData.append('file', file)
-      if (folder) formData.append('folder', folder)
-
-      const response = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: formData,
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Upload failed')
+      // File validation
+      const maxSize = 100 * 1024 * 1024 // 100MB
+      if (file.size > maxSize) {
+        throw new Error(`File ${file.name} is too large (max 100MB)`)
       }
 
-      const { url } = await response.json()
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+      if (!allowedTypes.includes(file.type)) {
+        throw new Error(`File ${file.name} has invalid type`)
+      }
+
+      // Generate filename
+      const ext = file.name.split('.').pop()
+      const fileName = `${nanoid()}.${ext}`
+      const filePath = folder ? `${folder}/${fileName}` : fileName
+
+      // Upload directly to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from(STORAGE.BUCKET_NAME)
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false,
+        })
+
+      if (uploadError) {
+        throw new Error(uploadError.message)
+      }
+
+      // Get public URL
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from(STORAGE.BUCKET_NAME).getPublicUrl(filePath)
+
       setProgress(((index + 1) / acceptedFiles.length) * 100)
-      return url
+      return publicUrl
     })
 
     try {
