@@ -1,14 +1,16 @@
 import { InstagramLogo } from '@/components/icons';
 import { NavigationItem } from '@/types';
 
+const year = new Date().getFullYear();
+
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   // TODO: menu depth
   {
     label: 'ARCHIVE',
     // TODO: sangun double depth
     subItems: [
-      { label: '2026 SS', href: '/archive/2026-ss' },
-      { label: '2026 FW', href: '/archive/2026-fw' },
+      { label: `${year} SS`, href: `/archive/${year}-ss` },
+      { label: `${year} FW`, href: `/archive/${year}-fw` },
     ],
   },
   {
@@ -25,7 +27,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   },
   {
     label: <InstagramLogo size={20} />,
-    href: 'https://instagram.com',
+    href: 'https://www.instagram.com/brisa.asia',
     target: '_blank',
   },
 ];

@@ -69,6 +69,7 @@ export const COLUMNS = {
     DESCRIPTION: 'description',
     SLUG: 'slug',
     CONTENT: 'content',
+    IMAGE_URL: 'image_url',
     IS_PUBLISHED: 'is_published',
     DISPLAY_ORDER: 'display_order',
     CREATED_AT: 'created_at',

@@ -1,5 +1,5 @@
 {
-  "name": "brisa-gallery",
+  "name": "brisa-asia",
   "version": "1.1.2",
   "private": true,
   "scripts": {
@@ -13,7 +13,8 @@
     "setup:secret": "bash scripts/generate-setup-secret.sh",
     "deploy": "vercel",
     "deploy:prod": "vercel --prod",
-    "predeploy": "bun run lint && bun run build:skip-version"
+    "predeploy": "bun run lint && bun run build:skip-version",
+    "env:update": "bash scripts/update-vercel-env.sh"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

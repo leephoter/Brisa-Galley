@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'News',
   description:
-    'Learn about our story, philosophy, and commitment to timeless design and quality craftsmanship. Discover the vision behind Brisa Archives.',
+    'Learn about our story, philosophy, and commitment to timeless design and quality craftsmanship. Discover the vision behind Brisa asia.',
   keywords: [
     'Brisa story',
     'fashion philosophy',
@@ -12,15 +12,15 @@ export const metadata: Metadata = {
     'sustainable fashion',
   ],
   openGraph: {
-    title: 'News | Brisa Archives',
+    title: 'News | Brisa asia',
     description: 'Learn about our story, philosophy, and commitment to timeless design.',
-    url: 'https://brisa-galley.vercel.app/news',
+    url: 'https://brisa.asia/news',
     type: 'website',
     images: ['/images/ogImage.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'News | Brisa Archives',
+    title: 'News | Brisa asia',
     description: 'Learn about our story, philosophy, and commitment to timeless design.',
     images: ['/images/ogImage.png'],
   },

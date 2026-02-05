@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/'],
       },
     ],
-    sitemap: 'https://brisa-galley.vercel.app/sitemap.xml',
-    host: 'https://brisa-galley.vercel.app',
+    sitemap: 'https://brisa.asia/sitemap.xml',
+    host: 'https://brisa.asia',
   };
 }

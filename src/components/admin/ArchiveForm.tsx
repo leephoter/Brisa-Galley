@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
+import { STORAGE } from '@/lib/data';
 import ImageUploader from './ImageUploader';
 import SortableImageGrid from './SortableImageGrid';
 import styles from './ArchiveForm.module.css';
@@ -79,6 +81,8 @@ export default function ArchiveForm({ initialData }: ArchiveFormProps) {
     setError(null);
 
     try {
+      const supabase = createClient();
+
       // Delete all images from storage
       const deletePromises = formData.image_order.map((imageUrl) => {
         // Extract path from URL
@@ -86,13 +90,11 @@ export default function ArchiveForm({ initialData }: ArchiveFormProps) {
         const pathParts = url.pathname.split('/');
         const path = pathParts.slice(-2).join('/'); // folder/filename
 
-        return fetch(`/api/admin/upload?path=${encodeURIComponent(path)}`, {
-          method: 'DELETE',
-        });
+        return supabase.storage.from(STORAGE.BUCKET_NAME).remove([path]);
       });
 
       const results = await Promise.all(deletePromises);
-      const failedDeletes = results.filter((res) => !res.ok);
+      const failedDeletes = results.filter((result) => result.error);
 
       if (failedDeletes.length > 0) {
         throw new Error(`Failed to delete ${failedDeletes.length} images from storage`);
@@ -223,11 +225,31 @@ export default function ArchiveForm({ initialData }: ArchiveFormProps) {
           <SortableImageGrid
             images={formData.image_order}
             onReorder={(newOrder) => setFormData((prev) => ({ ...prev, image_order: newOrder }))}
-            onDelete={(url) => {
-              setFormData((prev) => ({
-                ...prev,
-                image_order: prev.image_order.filter((img) => img !== url),
-              }));
+            onDelete={async (url) => {
+              try {
+                const supabase = createClient();
+
+                // Extract path from URL
+                const urlObj = new URL(url);
+                const pathParts = urlObj.pathname.split('/');
+                const path = pathParts.slice(-2).join('/'); // folder/filename
+
+                // Delete from storage
+                const { error } = await supabase.storage.from(STORAGE.BUCKET_NAME).remove([path]);
+
+                if (error) {
+                  throw error;
+                }
+
+                // Remove from form state
+                setFormData((prev) => ({
+                  ...prev,
+                  image_order: prev.image_order.filter((img) => img !== url),
+                }));
+              } catch (error) {
+                console.error('Delete image error:', error);
+                setError(error instanceof Error ? error.message : 'Failed to delete image');
+              }
             }}
           />
         )}
