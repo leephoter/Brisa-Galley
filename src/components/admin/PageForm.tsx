@@ -7,6 +7,14 @@ import PageContentEditor from './PageContentEditor';
 import ImageUploader from './ImageUploader';
 import styles from './PageForm.module.css';
 
+interface ThemeColors {
+  navigation: string;
+  title: string;
+  description: string;
+  contentTitle: string;
+  contentParagraph: string;
+}
+
 interface PageFormProps {
   page: {
     id: string;
@@ -18,8 +26,17 @@ interface PageFormProps {
     content?: PageContent | null;
     is_published?: boolean;
     image_url?: string | null;
+    theme_colors?: ThemeColors | null;
   };
 }
+
+const defaultThemeColors: ThemeColors = {
+  navigation: '#000000',
+  title: '#000000',
+  description: '#000000',
+  contentTitle: '#000000',
+  contentParagraph: '#000000',
+};
 
 export default function PageForm({ page }: PageFormProps) {
   const router = useRouter();
@@ -33,8 +50,9 @@ export default function PageForm({ page }: PageFormProps) {
     content: page.content || null,
     is_published: page.is_published !== undefined ? page.is_published : true,
     image_url: page.image_url || null,
+    theme_colors: page.theme_colors || defaultThemeColors,
   });
-  console.log('page', page);
+
   const isHomePage = page.page_key === 'home';
 
   async function handleSubmit(e: React.FormEvent) {
@@ -71,14 +89,46 @@ export default function PageForm({ page }: PageFormProps) {
       <div className={styles.section}>
         {isHomePage ? (
           <>
-            <h2>메인 페이지 배경 이미지</h2>
+            <h2>메인 페이지 설정</h2>
+
             <div className={styles.formGroup}>
+              <label>
+                메인 텍스트 (큰 글씨) <span className='required'>*</span>
+              </label>
+              <input
+                type='text'
+                value={formData.title}
+                onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
+                placeholder='BRISA'
+                required
+              />
+              <small>메인 페이지 중앙의 큰 텍스트 (예: BRISA)</small>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>서브 텍스트 (작은 글씨)</label>
+              <input
+                type='text'
+                value={formData.description}
+                onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
+                placeholder='Since 2025. SEOUL'
+              />
+              <small>메인 텍스트 아래 작은 글씨 (예: Since 2025. SEOUL)</small>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>배경 이미지</label>
               {formData.image_url && (
                 <div className={styles.currentImage}>
                   <img
                     src={formData.image_url}
                     alt='Current background'
-                    style={{ maxWidth: '100%', maxHeight: '400px', objectFit: 'contain', marginBottom: '1rem' }}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '400px',
+                      objectFit: 'contain',
+                      marginBottom: '1rem',
+                    }}
                   />
                   <button
                     type='button'
@@ -102,11 +152,69 @@ export default function PageForm({ page }: PageFormProps) {
             </div>
 
             <div className={styles.formGroup}>
+              <h3>색상 설정</h3>
+              <div className={styles.colorGrid}>
+                <div className={styles.colorInput}>
+                  <label>메뉴(Navigation) 색상</label>
+                  <input
+                    type='color'
+                    value={formData.theme_colors.navigation}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, navigation: e.target.value },
+                      }))
+                    }
+                  />
+                  <input
+                    type='text'
+                    value={formData.theme_colors.navigation}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, navigation: e.target.value },
+                      }))
+                    }
+                    placeholder='#000000'
+                    className={styles.colorText}
+                  />
+                </div>
+                <div className={styles.colorInput}>
+                  <label>메인 텍스트 색상 (BRISA, Since 2025)</label>
+                  <input
+                    type='color'
+                    value={formData.theme_colors.title}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, title: e.target.value },
+                      }))
+                    }
+                  />
+                  <input
+                    type='text'
+                    value={formData.theme_colors.title}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, title: e.target.value },
+                      }))
+                    }
+                    placeholder='#000000'
+                    className={styles.colorText}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.formGroup}>
               <label className={styles.checkbox}>
                 <input
                   type='checkbox'
                   checked={formData.is_published}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, is_published: e.target.checked }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, is_published: e.target.checked }))
+                  }
                 />
                 <span>사용</span>
               </label>
@@ -184,11 +292,119 @@ export default function PageForm({ page }: PageFormProps) {
             </div>
 
             <div className={styles.formGroup}>
+              <h3>색상 설정</h3>
+              <div className={styles.colorGrid}>
+                <div className={styles.colorInput}>
+                  <label>Title 색상</label>
+                  <input
+                    type='color'
+                    value={formData.theme_colors.title}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, title: e.target.value },
+                      }))
+                    }
+                  />
+                  <input
+                    type='text'
+                    value={formData.theme_colors.title}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, title: e.target.value },
+                      }))
+                    }
+                    placeholder='#000000'
+                    className={styles.colorText}
+                  />
+                </div>
+                <div className={styles.colorInput}>
+                  <label>Description 색상</label>
+                  <input
+                    type='color'
+                    value={formData.theme_colors.description}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, description: e.target.value },
+                      }))
+                    }
+                  />
+                  <input
+                    type='text'
+                    value={formData.theme_colors.description}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, description: e.target.value },
+                      }))
+                    }
+                    placeholder='#000000'
+                    className={styles.colorText}
+                  />
+                </div>
+                <div className={styles.colorInput}>
+                  <label>Content Section Title 색상</label>
+                  <input
+                    type='color'
+                    value={formData.theme_colors.contentTitle}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, contentTitle: e.target.value },
+                      }))
+                    }
+                  />
+                  <input
+                    type='text'
+                    value={formData.theme_colors.contentTitle}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, contentTitle: e.target.value },
+                      }))
+                    }
+                    placeholder='#000000'
+                    className={styles.colorText}
+                  />
+                </div>
+                <div className={styles.colorInput}>
+                  <label>Content Paragraphs 색상</label>
+                  <input
+                    type='color'
+                    value={formData.theme_colors.contentParagraph}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, contentParagraph: e.target.value },
+                      }))
+                    }
+                  />
+                  <input
+                    type='text'
+                    value={formData.theme_colors.contentParagraph}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        theme_colors: { ...prev.theme_colors, contentParagraph: e.target.value },
+                      }))
+                    }
+                    placeholder='#000000'
+                    className={styles.colorText}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.formGroup}>
               <label className={styles.checkbox}>
                 <input
                   type='checkbox'
                   checked={formData.is_published}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, is_published: e.target.checked }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, is_published: e.target.checked }))
+                  }
                 />
                 <span>공개</span>
               </label>

@@ -10,7 +10,13 @@
       "Bash(bun dev)",
       "Bash(next build:*)",
       "Bash(tree:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(bun run lint:*)",
+      "WebSearch",
+      "Bash(gh pr list:*)",
+      "Bash(open -a \"Google Chrome\" \"https://github.com/leephoter/Brisa-Galley/compare/main...feat/supabase?expand=1\")",
+      "Bash(vercel env:*)",
+      "Bash(chmod:*)"
     ],
     "deny": [],
     "ask": []

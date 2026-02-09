@@ -29,6 +29,10 @@ export default function PageHero({
   const title = directTitle || pageData?.title || pageData?.label || defaultTitle || '';
   const subtitle = directSubtitle || pageData?.description || defaultSubtitle;
 
+  // Theme colors
+  const titleColor = pageData?.theme_colors?.title || '#000000';
+  const descriptionColor = pageData?.theme_colors?.description || '#000000';
+
   return (
     <section className={styles.hero}>
       <motion.div
@@ -44,8 +48,8 @@ export default function PageHero({
           </>
         ) : (
           <>
-            <h1>{title}</h1>
-            {subtitle && <p>{subtitle}</p>}
+            <h1 style={{ color: titleColor }}>{title}</h1>
+            {subtitle && <p style={{ color: descriptionColor }}>{subtitle}</p>}
           </>
         )}
       </motion.div>

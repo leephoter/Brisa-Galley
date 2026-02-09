@@ -14,12 +14,15 @@ export default async function Home() {
   // Fetch home page settings
   const { data: homePage } = await supabase
     .from(TABLES.PAGES)
-    .select('image_url, is_published')
+    .select('image_url, is_published, theme_colors, title, description')
     .eq(COLUMNS.PAGES.PAGE_KEY, 'home')
     .single();
 
   // Use custom image if available and published, otherwise use default
   const backgroundImage = homePage?.image_url ?? null;
+  const textColor = homePage?.theme_colors?.title || '#000000';
+  const mainText = homePage?.title || 'BRISA';
+  const subText = homePage?.description || 'Since 2025. SEOUL';
 
   return (
     <>
@@ -36,7 +39,7 @@ export default async function Home() {
       </div>
       <PageContainer>
         <section className={styles.hero}>
-          <HomeClient />
+          <HomeClient textColor={textColor} mainText={mainText} subText={subText} />
         </section>
       </PageContainer>
     </>

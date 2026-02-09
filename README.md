@@ -1,6 +1,6 @@
-# Brisa Archives
+# Brisa asia
 
-A modern Brisa Archives website inspired by contemporary design.
+A modern Brisa asia website inspired by contemporary design.
 
 ## Features
 
@@ -119,7 +119,7 @@ Create a `.env.local` file:
 
 ```env
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_APP_NAME=Brisa Archives
+NEXT_PUBLIC_APP_NAME=Brisa asia
 ```
 
 ## Design System

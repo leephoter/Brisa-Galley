@@ -12,6 +12,10 @@ export default function CALLPage() {
   const { pageData } = usePageData('call');
   const content = pageData?.content;
 
+  // Theme colors
+  const contentTitleColor = pageData?.theme_colors?.contentTitle || '#000000';
+  const contentParagraphColor = pageData?.theme_colors?.contentParagraph || '#000000';
+
   return (
     <PageContainer>
       <PageHero pageKey='call' defaultTitle='CALL' defaultSubtitle="We'd love to hear from you" />
@@ -28,11 +32,11 @@ export default function CALLPage() {
                 viewport={CONSTANTS.BASE_MOTION.VIEWPORT}
                 transition={CONSTANTS.BASE_MOTION.TRANSITION(index)}
               >
-                {section.title && <h2>{section.title}</h2>}
+                {section.title && <h2 style={{ color: contentTitleColor }}>{section.title}</h2>}
                 {section.paragraphs && section.paragraphs.length > 0 && (
                   <div className={styles.text}>
                     {section.paragraphs.map((paragraph, pIndex) => (
-                      <p key={pIndex}>{paragraph}</p>
+                      <p key={pIndex} style={{ color: contentParagraphColor }}>{paragraph}</p>
                     ))}
                   </div>
                 )}

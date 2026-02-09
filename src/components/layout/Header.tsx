@@ -10,9 +10,10 @@ import styles from './Header.module.css';
 interface HeaderProps {
   archives?: Archive[];
   pages?: Page[];
+  navigationColor?: string;
 }
 
-export default function Header({ archives = [], pages = [] }: HeaderProps) {
+export default function Header({ archives = [], pages = [], navigationColor = '#000000' }: HeaderProps) {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
   // Archives 및 Pages 데이터로 동적 메뉴 생성
@@ -73,7 +74,7 @@ export default function Header({ archives = [], pages = [] }: HeaderProps) {
                     onMouseEnter={() => setOpenDropdown(index)}
                     onMouseLeave={() => setOpenDropdown(null)}
                   >
-                    <span className={styles.navLabel}>{item.label}</span>
+                    <span className={styles.navLabel} style={{ color: navigationColor }}>{item.label}</span>
                     <ul
                       className={`${styles.subNavList} ${
                         openDropdown === index ? styles.subNavListOpen : ''
@@ -90,7 +91,7 @@ export default function Header({ archives = [], pages = [] }: HeaderProps) {
                     </ul>
                   </div>
                 ) : (
-                  <Link href={item.href as string} className={styles.navLink} target={item.target}>
+                  <Link href={item.href as string} className={styles.navLink} target={item.target} style={{ color: navigationColor }}>
                     {item.label}
                   </Link>
                 )}
@@ -98,7 +99,7 @@ export default function Header({ archives = [], pages = [] }: HeaderProps) {
             ))}
           </ul>
         </nav>
-        <Link href='/' className={styles.logo}>
+        <Link href='/' className={styles.logo} style={{ color: navigationColor }}>
           BRISA
         </Link>
       </div>
