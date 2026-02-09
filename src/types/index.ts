@@ -61,14 +61,23 @@ export interface PageContent {
   sections: PageSection[];
 }
 
+export interface ThemeColors {
+  navigation: string;
+  title: string;
+  description: string;
+  contentTitle: string;
+  contentParagraph: string;
+}
+
 export interface Page {
   id: string;
-  page_key: 'place' | 'news' | 'call';
+  page_key: 'place' | 'news' | 'call' | 'home';
   title: string;
   label?: string;
   description?: string;
   slug: string;
   content?: PageContent | null;
+  theme_colors?: ThemeColors | null;
   is_published?: boolean;
   display_order?: number;
   created_at?: string;

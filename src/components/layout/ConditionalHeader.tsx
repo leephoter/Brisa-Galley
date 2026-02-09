@@ -48,5 +48,9 @@ export default function ConditionalHeader() {
     return <div className={styles.headerSkeleton} aria-label='Loading header' />;
   }
 
-  return <Header archives={archives} pages={pages} />;
+  // home 페이지의 navigation 색상 추출
+  const homePage = pages.find(p => p.page_key === 'home');
+  const navigationColor = homePage?.theme_colors?.navigation || '#000000';
+
+  return <Header archives={archives} pages={pages} navigationColor={navigationColor} />;
 }

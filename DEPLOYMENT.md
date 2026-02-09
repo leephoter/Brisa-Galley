@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This guide covers multiple deployment options for the Brisa Archives project.
+This guide covers multiple deployment options for the Brisa asia project.
 
 ## Table of Contents
 
@@ -26,21 +26,18 @@ Vercel is the recommended deployment platform for Next.js applications.
    ```
 
 2. **Import to Vercel**
-
    - Go to [vercel.com](https://vercel.com)
    - Click "Add New Project"
    - Import your GitHub repository
    - Vercel will auto-detect Next.js and configure build settings
 
 3. **Configure Build Settings**
-
    - Framework Preset: Next.js
    - Build Command: `bun run build`
    - Install Command: `bun install`
    - Output Directory: `.next`
 
 4. **Add Environment Variables** (Optional)
-
    - `NEXT_PUBLIC_APP_URL`: Your production URL
    - Add any other required environment variables
 
@@ -114,7 +111,6 @@ Runs on push to main:
    ```
 
 2. **Get Required Values**
-
    - Go to your project on Vercel
    - Settings → General
    - Copy:
@@ -124,7 +120,6 @@ Runs on push to main:
    - Create a new token
 
 3. **Add GitHub Secrets**
-
    - Go to your GitHub repository
    - Settings → Secrets and variables → Actions
    - Add these secrets:
@@ -276,16 +271,13 @@ az containerapp create \
 ### For Production Builds
 
 1. **Enable Image Optimization**
-
    - Add image domains to `next.config.js`
    - Use Next.js Image component
 
 2. **Enable Compression**
-
    - Gzip/Brotli compression (enabled by default on Vercel)
 
 3. **CDN Configuration**
-
    - Use Vercel's Edge Network
    - Configure caching headers
 

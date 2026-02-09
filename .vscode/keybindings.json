@@ -1,0 +1,14 @@
+[
+  {
+    "key": "ctrl+shift+d",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🚀 Deploy to Vercel (Preview)",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+p",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🚀 Deploy to Vercel (Production)",
+    "when": "editorTextFocus"
+  }
+]

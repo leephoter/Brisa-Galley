@@ -70,6 +70,7 @@ export const COLUMNS = {
     SLUG: 'slug',
     CONTENT: 'content',
     IMAGE_URL: 'image_url',
+    THEME_COLORS: 'theme_colors',
     IS_PUBLISHED: 'is_published',
     DISPLAY_ORDER: 'display_order',
     CREATED_AT: 'created_at',
