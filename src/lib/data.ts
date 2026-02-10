@@ -79,7 +79,17 @@ export const COLUMNS = {
 } as const;
 
 // 상수값
+export const BRISA = {
+  EN: {
+    UPPER: 'BRISA',
+    LOWER: 'Brisa',
+  },
+  KO: '브리사',
+  DOMAIN: 'brisa.asia',
+};
 export const CONSTANTS = {
+  BRISA: `${BRISA.EN.UPPER} (${BRISA.KO})`,
+  BRISA_ASIA: `${BRISA.EN.LOWER} asia`,
   E_MAIL: 'brisa562@naver.com',
   PHONE_NUMBER: '4972-6335',
   PLEASE_WAIT_MESSAGE: 'Coming Soon...',
@@ -89,4 +99,8 @@ export const CONSTANTS = {
     VIEWPORT: { once: true },
     TRANSITION: (delay: number = 0) => ({ duration: 0.4, delay }),
   },
+  DESCRIPTION: `Men's Tops, Bottoms and Outerwear`,
+  DOMAIN: 'brisa.asia',
+  URL: `https://${BRISA.DOMAIN}`,
+  INSTAGRAM: 'https://www.instagram.com/brisa.asia',
 };

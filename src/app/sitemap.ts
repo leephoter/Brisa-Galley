@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
 import { getArchives } from '@/lib/api/archives';
 import { getPages } from '@/lib/api/pages';
+import { CONSTANTS } from '@/lib/data';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://brisa.asia';
+  const baseUrl = `${CONSTANTS.URL}`;
   const currentDate = new Date();
 
   // Fetch dynamic data

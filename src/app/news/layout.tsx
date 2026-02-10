@@ -1,3 +1,4 @@
+import { CONSTANTS } from '@/lib/data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,15 +13,15 @@ export const metadata: Metadata = {
     'sustainable fashion',
   ],
   openGraph: {
-    title: 'News | Brisa asia',
+    title: `News | ${CONSTANTS.BRISA_ASIA}`,
     description: 'Learn about our story, philosophy, and commitment to timeless design.',
-    url: 'https://brisa.asia/news',
+    url: `${CONSTANTS.URL}/news`,
     type: 'website',
     images: ['/images/ogImage.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'News | Brisa asia',
+    title: `News | ${CONSTANTS.BRISA_ASIA}`,
     description: 'Learn about our story, philosophy, and commitment to timeless design.',
     images: ['/images/ogImage.png'],
   },

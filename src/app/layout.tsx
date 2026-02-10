@@ -3,32 +3,31 @@ import ConditionalHeader from '@/components/layout/ConditionalHeader';
 import { PageDataProvider } from '@/contexts/PageDataContext';
 import './globals.css';
 import packageJson from '../../package.json';
+import { BRISA, CONSTANTS } from '@/lib/data';
 
 const APP_VERSION = packageJson.version;
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://brisa.asia'),
+  metadataBase: new URL(`${CONSTANTS.URL}`),
   title: {
-    default: 'Brisa asia - Contemporary Fashion & Design',
-    template: '%s | Brisa asia',
+    default: `${CONSTANTS.BRISA} - ${CONSTANTS.DESCRIPTION}`,
+    template: `%s | ${BRISA.EN.LOWER}`,
   },
-  description:
-    'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
+  description: `${CONSTANTS.BRISA} - ${CONSTANTS.DESCRIPTION} in Seoul. Modern design collections, archive pieces, and artistic exhibitions. SANG UN fashion brand.`,
   keywords: [
-    'Brisa',
+    BRISA.EN.LOWER,
+    BRISA.KO,
+    BRISA.EN.UPPER,
     'SANG UN',
-    'contemporary fashion',
-    'fashion gallery',
+    'manswear',
+    '남성패션',
     'modern design',
-    'clothing collection',
-    'fashion archive',
-    'Korean fashion',
-    'style gallery',
-    'fashion exhibition',
+    'Seoul fashion',
+    '서울 패션',
   ],
-  authors: [{ name: 'Brisa asia', url: 'https://brisa.asia' }],
-  creator: 'Brisa asia',
-  publisher: 'Brisa asia',
+  authors: [{ name: CONSTANTS.BRISA, url: CONSTANTS.URL }],
+  creator: CONSTANTS.BRISA,
+  publisher: CONSTANTS.BRISA,
   formatDetection: {
     email: false,
     address: false,
@@ -37,25 +36,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: 'https://brisa.asia',
-    siteName: 'Brisa asia',
-    title: 'Brisa asia - Contemporary Fashion & Design',
-    description:
-      'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
+    url: `${CONSTANTS.URL}`,
+    siteName: CONSTANTS.BRISA,
+    title: `${CONSTANTS.BRISA} - ${CONSTANTS.DESCRIPTION}`,
+    description: `${CONSTANTS.BRISA} - ${CONSTANTS.DESCRIPTION} in Seoul. Modern design collections, archive pieces, and artistic exhibitions. SANG UN fashion brand.`,
     images: [
       {
         url: '/images/ogImage.png',
         width: 1200,
         height: 630,
-        alt: 'Brisa asia',
+        alt: `${CONSTANTS.BRISA} Fashion Gallery`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Brisa asia - Contemporary Fashion & Design',
-    description:
-      'BRISA / SANG UN - Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
+    title: `${CONSTANTS.BRISA} - ${CONSTANTS.DESCRIPTION}`,
+    description: `${CONSTANTS.BRISA} - ${CONSTANTS.DESCRIPTION} in Seoul. Modern design collections, archive pieces, and artistic exhibitions. SANG UN fashion brand.`,
     images: ['/images/ogImage.png'],
   },
   robots: {
@@ -72,6 +69,12 @@ export const metadata: Metadata = {
   verification: {
     // Google Search Console에서 받은 verification code를 여기에 추가
     // google: 'your-google-verification-code',
+    // 네이버 웹마스터 도구 verification code
+    // naver: 'your-naver-verification-code',
+  },
+  other: {
+    // 추가 메타 태그 (네이버 검색 최적화)
+    'naver-site-verification': '',
   },
 };
 
@@ -83,14 +86,18 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Brisa asia',
-    alternateName: 'BRISA / SANG UN',
-    url: 'https://brisa.asia',
-    logo: 'https://brisa.asia/logo.png',
-    description:
-      'Contemporary fashion gallery showcasing modern design collections, archive pieces, and artistic exhibitions since 2025.',
+    name: BRISA.EN.LOWER,
+    alternateName: [BRISA.KO, BRISA.EN.UPPER, 'SANG UN', CONSTANTS.BRISA_ASIA],
+    url: CONSTANTS.URL,
+    logo: `${CONSTANTS.URL}/logo.png`,
+    description: `${CONSTANTS.BRISA} - ${CONSTANTS.DESCRIPTION} in Seoul showcasing modern design collections, archive pieces, and artistic exhibitions.`,
     foundingDate: '2025',
-    sameAs: ['https://www.instagram.com/brisa.asia'],
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'KR',
+      addressLocality: 'Seoul',
+    },
+    sameAs: [CONSTANTS.INSTAGRAM],
   };
 
   return (

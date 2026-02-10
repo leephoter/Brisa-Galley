@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { TABLES, COLUMNS } from '@/lib/data';
+import { TABLES, COLUMNS, CONSTANTS } from '@/lib/data';
 import styles from './page.module.css';
 import PageContainer from '@/components/common/PageContainer';
 import HomeClient from '@/app/HomeClient';
@@ -21,8 +21,8 @@ export default async function Home() {
   // Use custom image if available and published, otherwise use default
   const backgroundImage = homePage?.image_url ?? null;
   const textColor = homePage?.theme_colors?.title || '#000000';
-  const mainText = homePage?.title || 'BRISA';
-  const subText = homePage?.description || 'Since 2025. SEOUL';
+  const mainText = homePage?.title || CONSTANTS.BRISA;
+  const subText = homePage?.description || CONSTANTS.DESCRIPTION;
 
   return (
     <>
