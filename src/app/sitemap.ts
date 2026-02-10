@@ -1,10 +1,19 @@
 import { MetadataRoute } from 'next';
+import { getArchives } from '@/lib/api/archives';
+import { getPages } from '@/lib/api/pages';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://brisa.asia';
   const currentDate = new Date();
 
-  return [
+  // Fetch dynamic data
+  const [archives, pages] = await Promise.all([
+    getArchives().catch(() => []),
+    getPages().catch(() => []),
+  ]);
+
+  // Static pages
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: currentDate,
@@ -17,29 +26,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/collection`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/news`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/place`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/call`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
   ];
+
+  // Dynamic archive pages
+  const archivePages: MetadataRoute.Sitemap = archives.map((archive) => ({
+    url: `${baseUrl}/archive/${archive.slug}`,
+    lastModified: archive.updated_at ? new Date(archive.updated_at) : currentDate,
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
+
+  // Dynamic pages (place, news, call)
+  const dynamicPages: MetadataRoute.Sitemap = pages
+    .filter((page) => page.is_published)
+    .map((page) => ({
+      url: `${baseUrl}/${page.slug}`,
+      lastModified: page.updated_at ? new Date(page.updated_at) : currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+
+  return [...staticPages, ...archivePages, ...dynamicPages];
 }

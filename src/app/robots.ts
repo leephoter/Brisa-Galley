@@ -1,15 +1,16 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = 'https://brisa.asia';
+
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/_next/'],
+        disallow: ['/admin/', '/api/', '/auth/'],
       },
     ],
-    sitemap: 'https://brisa.asia/sitemap.xml',
-    host: 'https://brisa.asia',
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
