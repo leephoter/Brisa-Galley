@@ -18,7 +18,7 @@
 
 .heroContent p {
   font-size: var(--font-size-base);
-  height: var(--font-size-base);
+  height: auto;
   color: var(--color-gray);
   letter-spacing: 0.05em;
 }
@@ -59,7 +59,7 @@
 
   .heroContent p {
     font-size: var(--font-size-sm);
-    height: var(--font-size-sm);
+    /* height: var(--font-size-sm); */
   }
 
   .skeletonTitle {
