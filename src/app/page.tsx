@@ -1,12 +1,22 @@
-import Image from 'next/image';
+import { Suspense } from 'react';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { TABLES, COLUMNS, CONSTANTS } from '@/lib/data';
 import styles from './page.module.css';
 import PageContainer from '@/components/common/PageContainer';
 import HomeClient from '@/app/HomeClient';
+import BackgroundImage from './BackgroundImage';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+
+// Loading fallback for background image
+function BackgroundImageFallback() {
+  return (
+    <div className={styles.fullPageBackground}>
+      <div className={styles.heroImage} style={{ backgroundColor: '#f3f4f6' }} />
+    </div>
+  );
+}
 
 export default async function Home() {
   const supabase = await createServerSupabaseClient();
@@ -14,29 +24,21 @@ export default async function Home() {
   // Fetch home page settings
   const { data: homePage } = await supabase
     .from(TABLES.PAGES)
-    .select('image_url, is_published, theme_colors, title, description')
+    .select('is_published, theme_colors, title, description')
     .eq(COLUMNS.PAGES.PAGE_KEY, 'home')
     .single();
 
-  // Use custom image if available and published, otherwise use default
-  const backgroundImage = homePage?.image_url ?? null;
   const textColor = homePage?.theme_colors?.title || '#000000';
   const mainText = homePage?.title || CONSTANTS.BRISA;
   const subText = homePage?.description || CONSTANTS.DESCRIPTION;
 
   return (
     <>
-      <div className={styles.fullPageBackground}>
-        {backgroundImage && (
-          <Image
-            src={backgroundImage}
-            alt='Background'
-            fill
-            className={styles.heroImage}
-            priority
-          />
-        )}
-      </div>
+      <Suspense fallback={<BackgroundImageFallback />}>
+        <div className={styles.fullPageBackground}>
+          <BackgroundImage />
+        </div>
+      </Suspense>
       <PageContainer>
         <section className={styles.hero}>
           <HomeClient textColor={textColor} mainText={mainText} subText={subText} />
